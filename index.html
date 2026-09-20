@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -18,6 +19,99 @@
       overflow-x: hidden;
     }
 
+    /* Pantalla de Bienvenida (Intro con Logo) */
+    #pantalla-intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 2, 5, 0.96);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .logo-intro-container {
+      position: relative;
+      cursor: pointer;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Luz LED alrededor del logo con animación de colores */
+    .logo-intro-container img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      animation: latido 2s infinite ease-in-out;
+      filter: drop-shadow(0 0 15px #00f3ff);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-intro-container:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Efecto de brillo LED RGB aleatorio alrededor */
+    .logo-intro-container::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #00f3ff, #bc13fe, #ff0055, #00ff66);
+      background-size: 400% 400%;
+      z-index: 1;
+      filter: blur(25px);
+      opacity: 0.8;
+      animation: rgbGlow 6s infinite linear;
+    }
+
+    @keyframes rgbGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .texto-intro {
+      margin-top: 25px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: center;
+      text-shadow: 0 0 10px #00f3ff, 0 0 20px #bc13fe;
+      animation: parpadeoText 1.5s infinite alternate;
+    }
+
+    @keyframes parpadeoText {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; text-shadow: 0 0 20px #00f3ff, 0 0 30px #00f3ff; }
+    }
+
+    /* Ocultar intro al hacer clic */
+    .ocultar-intro {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Estilos del Sitio Web Principal */
     header {
       background: rgba(5, 5, 8, 0.95);
       border-bottom: 2px solid #00f3ff;
@@ -74,7 +168,6 @@
       font-size: 0.95rem;
     }
 
-    /* Secciones y Contenedores */
     section {
       padding: 30px 20px;
       max-width: 1200px;
@@ -96,7 +189,6 @@
       gap: 25px;
     }
 
-    /* Tarjetas Neón */
     .card {
       background: #0d0d12;
       border: 1px solid #1f1f2e;
@@ -139,7 +231,6 @@
       margin-bottom: 12px;
     }
 
-    /* Botones Neón */
     .btn-agregar {
       background: transparent;
       color: #00f3ff;
@@ -164,6 +255,18 @@
 </head>
 <body>
 
+  <!-- PANTALLA DE BIENVENIDA / INTRO CON LOGO -->
+  <div id="pantalla-intro" onclick="entrarTienda()">
+    <div class="logo-intro-container">
+      <!-- AQUÍ PUEDES CAMBIAR EL ENLACE DE TU LOGO -->
+      <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="decantAMS Logo">
+    </div>
+    <div class="texto-intro">
+      ⚡ Toca el logo para entrar al inicio ⚡
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL DE LA WEB -->
   <header>
     <h1>decantAMS</h1>
     <nav>
@@ -182,7 +285,6 @@
     <h2 class="section-title">Perfumes / Decants</h2>
     <div class="productos-grid">
       
-      <!-- Ejemplo de Card -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love">
         <h3>Perry Ellis Love</h3>
@@ -193,6 +295,12 @@
     </div>
   </section>
 
+  <script>
+    function entrarTienda() {
+      const intro = document.getElementById('pantalla-intro');
+      intro.classList.add('ocultar-intro');
+    }
+  </script>
+
 </body>
 </html>
-
