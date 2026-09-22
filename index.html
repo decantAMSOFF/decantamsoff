@@ -107,11 +107,11 @@
       visibility: hidden;
     }
 
-    /* Estilos del Sitio Web Principal */
+    /* Estilos del Header y Logo con Anillo RGB Morado/Rosa girando */
     header {
       background: rgba(5, 5, 8, 0.95);
       border-bottom: 2px solid #00f3ff;
-      padding: 20px;
+      padding: 15px 20px;
       text-align: center;
       position: sticky;
       top: 0;
@@ -121,28 +121,73 @@
 
     header h1 {
       color: #fff;
-      font-size: 2rem;
+      font-size: 1.8rem;
       letter-spacing: 3px;
       text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+      margin-bottom: 12px;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
     }
 
     nav {
-      margin-top: 10px;
       display: flex;
-      justify-content: center;
-      gap: 20px;
+      gap: 15px;
     }
 
     nav a {
       color: #b0b0b0;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
       transition: 0.3s;
     }
 
     nav a:hover {
       color: #bc13fe;
       text-shadow: 0 0 8px #bc13fe;
+    }
+
+    /* Contenedor del Logo en el Header con LED RGB Rotativo Morado/Rosa */
+    .header-logo-wrapper {
+      position: relative;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .header-logo-wrapper img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      background: #050508;
+    }
+
+    /* Círculo de luz giratorio con tonos Morado (#bc13fe) y Rosa (#ff007f) */
+    .header-logo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(#bc13fe, #ff007f, #da70d6, #ff1493, #bc13fe);
+      z-index: 1;
+      animation: girarLed 3s linear infinite;
+      filter: drop-shadow(0 0 8px #bc13fe);
+    }
+
+    @keyframes girarLed {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .hero {
@@ -227,7 +272,6 @@
       margin-bottom: 10px;
     }
 
-    /* Selector de Medidas */
     .medidas-container {
       display: flex;
       justify-content: center;
@@ -295,21 +339,30 @@
     </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- HEADER ACTUALIZADO CON LOGO Y LED GIRATORIO MORADO/ROSA -->
   <header>
     <h1>decantAMS</h1>
-    <nav>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#carrito">Carrito (0)</a>
-    </nav>
+    <div class="header-content">
+      <nav>
+        <a href="#catalogo">Catálogo</a>
+      </nav>
+      
+      <div class="header-logo-wrapper">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Logo">
+      </div>
+
+      <nav>
+        <a href="#carrito">Carrito (0)</a>
+      </nav>
+    </div>
   </header>
 
   <div class="hero">
-    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
+    <h2>UN DECANT PARA CADA OCASION</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
-  <!-- SECCIÓN DE CATÁLOGO CON LAS 13 CARTAS -->
+  <!-- SECCIÓN DE CATÁLOGO (13 CARTAS) -->
   <section id="catalogo">
     <h2 class="section-title">Perfumes / Decants (13)</h2>
     <div class="productos-grid">
@@ -425,7 +478,7 @@
         <span class="badge-familia">Oriental Ambarina</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
+          <button class="medida-btn">10mlgif</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
         <button class="btn-agregar">Agregar al Carrito</button>
@@ -459,7 +512,7 @@
 
       <!-- 12 -->
       <div class="card">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislogo.png" alt="Y Le Parfum">
         <h3>Y Le Parfum</h3>
         <span class="badge-familia">Fougère Fuentre</span>
         <div class="medidas-container">
