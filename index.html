@@ -18,7 +18,7 @@
       overflow-x: hidden;
     }
 
-    /* Pantalla de Bienvenida (Intro con Logo) */
+    /* Pantalla de Bienvenida con Borde Neón Fino al Estilo de la Referencia */
     #pantalla-intro {
       position: fixed;
       top: 0;
@@ -38,63 +38,44 @@
       position: relative;
       cursor: pointer;
       text-align: center;
-      padding: 20px;
+      padding: 15px;
+      border-radius: 50%;
+      /* Borde de luz fino y elegante pegado al logo */
+      border: 2px solid #00f3ff;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.5), inset 0 0 15px rgba(0, 243, 255, 0.3);
+      animation: latido 2s infinite ease-in-out;
+      background: #0d0d12;
+    }
+
+    .logo-intro-container:hover {
+      border-color: #bc13fe;
+      box-shadow: 0 0 20px rgba(188, 19, 254, 0.8), inset 0 0 15px rgba(188, 19, 254, 0.4);
     }
 
     .logo-intro-container img {
-      width: 180px;
-      height: 180px;
+      width: 130px;
+      height: 130px;
       object-fit: contain;
       border-radius: 50%;
-      position: relative;
-      z-index: 2;
-      animation: latido 2s infinite ease-in-out;
-      filter: drop-shadow(0 0 15px #00f3ff);
-      transition: transform 0.3s ease;
-    }
-
-    .logo-intro-container:hover img {
-      transform: scale(1.08);
-    }
-
-    .logo-intro-container::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, #00f3ff, #bc13fe, #ff0055, #00ff66);
-      background-size: 400% 400%;
-      z-index: 1;
-      filter: blur(25px);
-      opacity: 0.8;
-      animation: rgbGlow 6s infinite linear;
-    }
-
-    @keyframes rgbGlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      display: block;
     }
 
     @keyframes latido {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      50% { transform: scale(1.03); }
     }
 
     .texto-intro {
       margin-top: 25px;
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-transform: uppercase;
       text-align: center;
       text-shadow: 0 0 10px #00f3ff, 0 0 20px #bc13fe;
       animation: parpadeoText 1.5s infinite alternate;
+      padding: 0 15px;
     }
 
     @keyframes parpadeoText {
@@ -107,11 +88,11 @@
       visibility: hidden;
     }
 
-    /* Estilos del Header y Logo con Anillo RGB Morado/Rosa girando */
+    /* Estilos del Header y Logo con Anillo RGB Rotativo Morado/Rosa */
     header {
       background: rgba(5, 5, 8, 0.95);
       border-bottom: 2px solid #00f3ff;
-      padding: 15px 20px;
+      padding: 12px 15px;
       text-align: center;
       position: sticky;
       top: 0;
@@ -121,30 +102,24 @@
 
     header h1 {
       color: #fff;
-      font-size: 1.8rem;
-      letter-spacing: 3px;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
       text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .header-content {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
+      gap: 20px;
     }
 
     nav a {
       color: #b0b0b0;
       text-decoration: none;
       font-weight: bold;
-      font-size: 1rem;
+      font-size: 0.9rem;
       transition: 0.3s;
     }
 
@@ -153,19 +128,18 @@
       text-shadow: 0 0 8px #bc13fe;
     }
 
-    /* Contenedor del Logo en el Header con LED RGB Rotativo Morado/Rosa */
     .header-logo-wrapper {
       position: relative;
-      width: 55px;
-      height: 55px;
+      width: 45px;
+      height: 45px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
     .header-logo-wrapper img {
-      width: 48px;
-      height: 48px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
       border-radius: 50%;
       position: relative;
@@ -173,16 +147,15 @@
       background: #050508;
     }
 
-    /* Círculo de luz giratorio con tonos Morado (#bc13fe) y Rosa (#ff007f) */
     .header-logo-wrapper::before {
       content: '';
       position: absolute;
-      inset: -3px;
+      inset: -2px;
       border-radius: 50%;
       background: conic-gradient(#bc13fe, #ff007f, #da70d6, #ff1493, #bc13fe);
       z-index: 1;
       animation: girarLed 3s linear infinite;
-      filter: drop-shadow(0 0 8px #bc13fe);
+      filter: drop-shadow(0 0 6px #bc13fe);
     }
 
     @keyframes girarLed {
@@ -192,49 +165,50 @@
 
     .hero {
       text-align: center;
-      padding: 40px 20px;
+      padding: 25px 15px;
       background: linear-gradient(180deg, rgba(188, 19, 254, 0.1) 0%, rgba(5, 5, 8, 1) 100%);
       border-bottom: 1px solid #222;
     }
 
     .hero h2 {
-      font-size: 1.8rem;
+      font-size: 1.3rem;
       color: #fff;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       text-shadow: 0 0 8px rgba(188, 19, 254, 0.6);
     }
 
     .hero p {
       color: #888;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
     section {
-      padding: 30px 20px;
+      padding: 20px 10px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: #00f3ff;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border-left: 4px solid #00f3ff;
-      padding-left: 10px;
+      padding-left: 8px;
       text-shadow: 0 0 8px rgba(0, 243, 255, 0.4);
     }
 
+    /* Cuadrícula de 2 tarjetas por línea */
     .productos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
 
     .card {
       background: #0d0d12;
       border: 1px solid #1f1f2e;
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 10px;
+      padding: 12px 8px;
       text-align: center;
       transition: all 0.3s ease;
       position: relative;
@@ -243,22 +217,24 @@
 
     .card:hover {
       border-color: #bc13fe;
-      box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
-      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
     }
 
     .card img {
       width: 100%;
-      height: 200px;
+      height: 120px;
       object-fit: contain;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
+      margin-bottom: 8px;
+      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.8));
     }
 
     .card h3 {
       color: #fff;
-      font-size: 1.1rem;
-      margin-bottom: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .badge-familia {
@@ -266,26 +242,26 @@
       background: rgba(0, 243, 255, 0.1);
       color: #00f3ff;
       border: 1px solid rgba(0, 243, 255, 0.3);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      margin-bottom: 10px;
+      padding: 2px 6px;
+      border-radius: 15px;
+      font-size: 0.65rem;
+      margin-bottom: 8px;
     }
 
     .medidas-container {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 8px;
     }
 
     .medida-btn {
       background: #151520;
       border: 1px solid #333;
       color: #aaa;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: 0.3s;
     }
@@ -294,42 +270,43 @@
       background: rgba(188, 19, 254, 0.2);
       border-color: #bc13fe;
       color: #fff;
-      box-shadow: 0 0 8px rgba(188, 19, 254, 0.4);
+      box-shadow: 0 0 5px rgba(188, 19, 254, 0.4);
     }
 
     .precio-dinamico {
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       color: #00f3ff;
       font-weight: bold;
-      margin-bottom: 12px;
-      text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+      margin-bottom: 8px;
+      text-shadow: 0 0 4px rgba(0, 243, 255, 0.3);
     }
 
     .btn-agregar {
       background: transparent;
       color: #00f3ff;
-      border: 2px solid #00f3ff;
+      border: 1px solid #00f3ff;
       width: 100%;
-      padding: 10px;
-      border-radius: 8px;
+      padding: 8px 4px;
+      border-radius: 6px;
       font-weight: bold;
+      font-size: 0.7rem;
       cursor: pointer;
       transition: 0.3s;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
     }
 
     .btn-agregar:hover {
       background: #00f3ff;
       color: #050508;
-      box-shadow: 0 0 20px #00f3ff;
+      box-shadow: 0 0 15px #00f3ff;
     }
   </style>
 </head>
 <body>
 
-  <!-- PANTALLA DE INTRO -->
+  <!-- PANTALLA DE INTRO CON BORDE NEÓN FINO -->
   <div id="pantalla-intro" onclick="entrarTienda()">
     <div class="logo-intro-container">
       <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="decantAMS Logo">
@@ -339,7 +316,7 @@
     </div>
   </div>
 
-  <!-- HEADER ACTUALIZADO CON LOGO Y LED GIRATORIO MORADO/ROSA -->
+  <!-- HEADER -->
   <header>
     <h1>decantAMS</h1>
     <div class="header-content">
@@ -358,7 +335,7 @@
   </header>
 
   <div class="hero">
-    <h2>UN DECANT PARA CADA OCASION</h2>
+    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
@@ -377,163 +354,163 @@
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$70.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 2 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic">
         <h3>Nautica Classic</h3>
-        <span class="badge-familia">Amaderado Chipre</span>
+        <span class="badge-familia">Amaderado</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$50.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 3 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Afnan 9pm">
         <h3>Afnan 9pm</h3>
-        <span class="badge-familia">Oriental Vainilla</span>
+        <span class="badge-familia">Oriental</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$80.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 4 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Eros Versace">
         <h3>Eros Versace</h3>
-        <span class="badge-familia">Fougère Aromática</span>
+        <span class="badge-familia">Fougère</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 5 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense">
-        <h3>Club de Nuit Intense</h3>
-        <span class="badge-familia">Amaderada Especiada</span>
+        <h3>Club de Nuit</h3>
+        <span class="badge-familia">Amaderada</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 6 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bleu de Chanel">
         <h3>Bleu de Chanel</h3>
-        <span class="badge-familia">Amaderada Aromática</span>
+        <span class="badge-familia">Aromática</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 7 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior">
         <h3>Sauvage Dior</h3>
-        <span class="badge-familia">Fougère Citrica</span>
+        <span class="badge-familia">Cítrica</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 8 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="1 Million Lucky">
         <h3>1 Million Lucky</h3>
-        <span class="badge-familia">Amaderada Ambarina</span>
+        <span class="badge-familia">Ambarina</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$95.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 9 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Le Male Le Parfum">
         <h3>Le Male Le Parfum</h3>
-        <span class="badge-familia">Oriental Ambarina</span>
+        <span class="badge-familia">Oriental</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10mlgif</button>
+          <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 10 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="The Most Wanted">
         <h3>The Most Wanted</h3>
-        <span class="badge-familia">Especiada Ambarina</span>
+        <span class="badge-familia">Especiada</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$105.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 11 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bad Boy Cobalt">
         <h3>Bad Boy Cobalt</h3>
-        <span class="badge-familia">Amaderada Aromática</span>
+        <span class="badge-familia">Aromática</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 12 -->
       <div class="card">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislogo.png" alt="Y Le Parfum">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum">
         <h3>Y Le Parfum</h3>
-        <span class="badge-familia">Fougère Fuentre</span>
+        <span class="badge-familia">Fougère</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
       <!-- 13 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Hawas Rasasi">
         <h3>Hawas Rasasi</h3>
-        <span class="badge-familia">Acuática Aromática</span>
+        <span class="badge-familia">Acuática</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
-        <button class="btn-agregar">Agregar al Carrito</button>
+        <button class="btn-agregar">Agregar</button>
       </div>
 
     </div>
