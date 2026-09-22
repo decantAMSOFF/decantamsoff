@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>decantAMS | Cyber Edition</title>
   <style>
-    /* Estilos Base - Cyberpunk / Neón Dark */
+    /* Estilos Base - Cyberpunk & Perfume Luxury Dark */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,7 +13,13 @@
     }
 
     body {
-      background-color: #050508;
+      background-color: #030305;
+      /* Fondo con un patrón sutil de ciber-rejilla y destellos estilo spray/neblina de perfume */
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(188, 19, 254, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+        repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,255,255,0.01) 50px, rgba(255,255,255,0.01) 51px);
       color: #e0e0e0;
       overflow-x: hidden;
     }
@@ -94,7 +100,8 @@
 
     /* Estilos del Header */
     header {
-      background: rgba(5, 5, 8, 0.95);
+      background: rgba(5, 5, 8, 0.92);
+      backdrop-filter: blur(10px);
       border-bottom: 2px solid #00f3ff;
       padding: 12px 15px;
       text-align: center;
@@ -166,9 +173,9 @@
 
     .hero {
       text-align: center;
-      padding: 25px 15px;
-      background: linear-gradient(180deg, rgba(188, 19, 254, 0.1) 0%, rgba(5, 5, 8, 1) 100%);
-      border-bottom: 1px solid #222;
+      padding: 30px 15px;
+      background: linear-gradient(180deg, rgba(188, 19, 254, 0.15) 0%, rgba(3, 3, 5, 0) 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .hero h2 {
@@ -205,17 +212,14 @@
       gap: 12px;
     }
 
-    /* ========================================================= */
-    /* TARJETAS CON EFECTO DE LUZ RGB FLUIDO AL PRESIONAR/HOVER */
-    /* ========================================================= */
+    /* Tarjetas con efecto de luz RGB fluido al presionar/hover */
     .card {
       background: #0d0d12;
       border-radius: 12px;
       padding: 12px 8px;
       text-align: center;
       position: relative;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      /* Borde fino con gradiente transparente por defecto */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
       border: 2px solid transparent;
       background-image: linear-gradient(#0d0d12, #0d0d12), linear-gradient(135deg, #222, #111);
       background-origin: border-box;
@@ -223,7 +227,6 @@
       transition: all 0.3s ease;
     }
 
-    /* Al pasar el cursor o presionar la tarjeta, se activa el borde RGB animado fluido */
     .card:hover, .card:active {
       background-image: linear-gradient(#0d0d12, #0d0d12), conic-gradient(from 0deg, #00f3ff, #bc13fe, #ff0055, #00ff66, #00f3ff);
       background-origin: border-box;
@@ -244,7 +247,7 @@
       height: 120px;
       object-fit: contain;
       margin-bottom: 8px;
-      filter: drop-shadow(0 3px 3px rgba(0,0,0,0.8));
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.9));
     }
 
     .card h3 {
@@ -325,6 +328,7 @@
 </head>
 <body>
 
+  <!-- PANTALLA DE INTRO -->
   <div id="pantalla-intro" onclick="entrarTienda()">
     <div class="logo-intro-container">
       <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="decantAMS Logo">
@@ -334,6 +338,7 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header>
     <h1>decantAMS</h1>
     <div class="header-content">
@@ -356,10 +361,12 @@
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
+  <!-- SECCIÓN DE CATÁLOGO (13 CARTAS) -->
   <section id="catalogo">
     <h2 class="section-title">Perfumes / Decants (13)</h2>
     <div class="productos-grid">
       
+      <!-- 1 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love">
         <h3>Perry Ellis Love</h3>
@@ -372,6 +379,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 2 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic">
         <h3>Nautica Classic</h3>
@@ -384,6 +392,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 3 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Afnan 9pm">
         <h3>Afnan 9pm</h3>
@@ -396,6 +405,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 4 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Eros Versace">
         <h3>Eros Versace</h3>
@@ -408,6 +418,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 5 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense">
         <h3>Club de Nuit</h3>
@@ -420,6 +431,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 6 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bleu de Chanel">
         <h3>Bleu de Chanel</h3>
@@ -432,6 +444,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 7 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior">
         <h3>Sauvage Dior</h3>
@@ -444,6 +457,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 8 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="1 Million Lucky">
         <h3>1 Million Lucky</h3>
@@ -456,6 +470,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 9 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Le Male Le Parfum">
         <h3>Le Male Le Parfum</h3>
@@ -468,6 +483,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 10 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="The Most Wanted">
         <h3>The Most Wanted</h3>
@@ -480,6 +496,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 11 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bad Boy Cobalt">
         <h3>Bad Boy Cobalt</h3>
@@ -492,6 +509,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 12 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum">
         <h3>Y Le Parfum</h3>
@@ -504,6 +522,7 @@
         <button class="btn-agregar">Agregar</button>
       </div>
 
+      <!-- 13 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Hawas Rasasi">
         <h3>Hawas Rasasi</h3>
