@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -42,7 +41,6 @@
       padding: 20px;
     }
 
-    /* Luz LED alrededor del logo con animación de colores */
     .logo-intro-container img {
       width: 180px;
       height: 180px;
@@ -59,7 +57,6 @@
       transform: scale(1.08);
     }
 
-    /* Efecto de brillo LED RGB aleatorio alrededor */
     .logo-intro-container::before {
       content: '';
       position: absolute;
@@ -105,7 +102,6 @@
       100% { opacity: 1; text-shadow: 0 0 20px #00f3ff, 0 0 30px #00f3ff; }
     }
 
-    /* Ocultar intro al hacer clic */
     .ocultar-intro {
       opacity: 0;
       visibility: hidden;
@@ -208,7 +204,7 @@
 
     .card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: contain;
       margin-bottom: 15px;
       filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
@@ -216,7 +212,7 @@
 
     .card h3 {
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 8px;
     }
 
@@ -228,7 +224,41 @@
       padding: 4px 10px;
       border-radius: 20px;
       font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+
+    /* Selector de Medidas */
+    .medidas-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 12px;
+    }
+
+    .medida-btn {
+      background: #151520;
+      border: 1px solid #333;
+      color: #aaa;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .medida-btn.active {
+      background: rgba(188, 19, 254, 0.2);
+      border-color: #bc13fe;
+      color: #fff;
+      box-shadow: 0 0 8px rgba(188, 19, 254, 0.4);
+    }
+
+    .precio-dinamico {
+      font-size: 1.1rem;
+      color: #00f3ff;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
     }
 
     .btn-agregar {
@@ -236,7 +266,7 @@
       color: #00f3ff;
       border: 2px solid #00f3ff;
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
@@ -255,10 +285,9 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE BIENVENIDA / INTRO CON LOGO -->
+  <!-- PANTALLA DE INTRO -->
   <div id="pantalla-intro" onclick="entrarTienda()">
     <div class="logo-intro-container">
-      <!-- AQUÍ PUEDES CAMBIAR EL ENLACE DE TU LOGO -->
       <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="decantAMS Logo">
     </div>
     <div class="texto-intro">
@@ -266,29 +295,191 @@
     </div>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL DE LA WEB -->
+  <!-- HEADER -->
   <header>
     <h1>decantAMS</h1>
     <nav>
       <a href="#catalogo">Catálogo</a>
-      <a href="#gorras">Gorras</a>
       <a href="#carrito">Carrito (0)</a>
     </nav>
   </header>
 
   <div class="hero">
     <h2>SISTEMA CYBERPUNK ACTIVO</h2>
-    <p>⚡ Fragancias exclusivas y streetwear de alta gama ⚡</p>
+    <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
+  <!-- SECCIÓN DE CATÁLOGO CON LAS 13 CARTAS -->
   <section id="catalogo">
-    <h2 class="section-title">Perfumes / Decants</h2>
+    <h2 class="section-title">Perfumes / Decants (13)</h2>
     <div class="productos-grid">
       
+      <!-- 1 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love">
         <h3>Perry Ellis Love</h3>
         <span class="badge-familia">Floral</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 2 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic">
+        <h3>Nautica Classic</h3>
+        <span class="badge-familia">Amaderado Chipre</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$50.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 3 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Afnan 9pm">
+        <h3>Afnan 9pm</h3>
+        <span class="badge-familia">Oriental Vainilla</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$80.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 4 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Eros Versace">
+        <h3>Eros Versace</h3>
+        <span class="badge-familia">Fougère Aromática</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$90.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 5 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense">
+        <h3>Club de Nuit Intense</h3>
+        <span class="badge-familia">Amaderada Especiada</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$85.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 6 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bleu de Chanel">
+        <h3>Bleu de Chanel</h3>
+        <span class="badge-familia">Amaderada Aromática</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$110.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 7 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior">
+        <h3>Sauvage Dior</h3>
+        <span class="badge-familia">Fougère Citrica</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$100.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 8 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="1 Million Lucky">
+        <h3>1 Million Lucky</h3>
+        <span class="badge-familia">Amaderada Ambarina</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$95.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 9 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Le Male Le Parfum">
+        <h3>Le Male Le Parfum</h3>
+        <span class="badge-familia">Oriental Ambarina</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$100.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 10 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="The Most Wanted">
+        <h3>The Most Wanted</h3>
+        <span class="badge-familia">Especiada Ambarina</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$105.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 11 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bad Boy Cobalt">
+        <h3>Bad Boy Cobalt</h3>
+        <span class="badge-familia">Amaderada Aromática</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$90.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 12 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum">
+        <h3>Y Le Parfum</h3>
+        <span class="badge-familia">Fougère Fuentre</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$110.00</div>
+        <button class="btn-agregar">Agregar al Carrito</button>
+      </div>
+
+      <!-- 13 -->
+      <div class="card">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Hawas Rasasi">
+        <h3>Hawas Rasasi</h3>
+        <span class="badge-familia">Acuática Aromática</span>
+        <div class="medidas-container">
+          <button class="medida-btn active">5ml</button>
+          <button class="medida-btn">10ml</button>
+        </div>
+        <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar">Agregar al Carrito</button>
       </div>
 
