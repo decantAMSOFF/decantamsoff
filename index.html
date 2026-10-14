@@ -409,12 +409,15 @@
       background: #0d0d16;
       border: 2px solid #00f3ff;
       border-radius: 15px;
-      width: 90%;
-      max-width: 380px;
+      width: 92%;
+      max-width: 400px;
       padding: 20px;
       text-align: center;
       box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
       position: relative;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .modal-contenido h3 {
@@ -424,10 +427,51 @@
       text-shadow: 0 0 8px #00f3ff;
     }
 
-    .modal-contenido p {
-      color: #bbb;
+    /* Lista de productos dentro del modal */
+    .lista-carrito {
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      text-align: left;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 0;
+    }
+
+    .item-carrito {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #ccc;
+      padding: 6px 4px;
+      border-bottom: 1px dashed rgba(255,255,255,0.05);
+    }
+
+    .item-carrito span {
+      color: #00f3ff;
+      font-weight: bold;
+    }
+
+    .btn-eliminar-item {
+      background: none;
+      border: none;
+      color: #ff0055;
+      cursor: pointer;
       font-size: 0.85rem;
-      margin-bottom: 20px;
+      margin-left: 8px;
+    }
+
+    .modal-total {
+      font-size: 1rem;
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-shadow: 0 0 5px #bc13fe;
+    }
+
+    .modal-total span {
+      color: #00f3ff;
     }
 
     .btn-finalizar {
@@ -514,7 +558,7 @@
     <div class="productos-grid">
       
       <!-- 1 -->
-      <div class="card">
+      <div class="card" data-nombre="Perry Ellis Love">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love" class="producto-img">
         <h3>Perry Ellis Love</h3>
         <span class="badge-familia">Floral</span>
@@ -528,7 +572,7 @@
       </div>
 
       <!-- 2 -->
-      <div class="card">
+      <div class="card" data-nombre="Nautica Classic">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic" class="producto-img">
         <h3>Nautica Classic</h3>
         <span class="badge-familia">Amaderado</span>
@@ -542,7 +586,7 @@
       </div>
 
       <!-- 3 -->
-      <div class="card">
+      <div class="card" data-nombre="Afnan 9pm">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Afnan 9pm" class="producto-img">
         <h3>Afnan 9pm</h3>
         <span class="badge-familia">Oriental</span>
@@ -556,7 +600,7 @@
       </div>
 
       <!-- 4 -->
-      <div class="card">
+      <div class="card" data-nombre="Eros Versace">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Eros Versace" class="producto-img">
         <h3>Eros Versace</h3>
         <span class="badge-familia">Fougère</span>
@@ -570,7 +614,7 @@
       </div>
 
       <!-- 5 -->
-      <div class="card">
+      <div class="card" data-nombre="Club de Nuit">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense" class="producto-img">
         <h3>Club de Nuit</h3>
         <span class="badge-familia">Amaderada</span>
@@ -584,7 +628,7 @@
       </div>
 
       <!-- 6 -->
-      <div class="card">
+      <div class="card" data-nombre="Bleu de Chanel">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bleu de Chanel" class="producto-img">
         <h3>Bleu de Chanel</h3>
         <span class="badge-familia">Aromática</span>
@@ -598,7 +642,7 @@
       </div>
 
       <!-- 7 -->
-      <div class="card">
+      <div class="card" data-nombre="Sauvage Dior">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior" class="producto-img">
         <h3>Sauvage Dior</h3>
         <span class="badge-familia">Cítrica</span>
@@ -612,7 +656,7 @@
       </div>
 
       <!-- 8 -->
-      <div class="card">
+      <div class="card" data-nombre="1 Million Lucky">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="1 Million Lucky" class="producto-img">
         <h3>1 Million Lucky</h3>
         <span class="badge-familia">Ambarina</span>
@@ -626,7 +670,7 @@
       </div>
 
       <!-- 9 -->
-      <div class="card">
+      <div class="card" data-nombre="Le Male Le Parfum">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Le Male Le Parfum" class="producto-img">
         <h3>Le Male Le Parfum</h3>
         <span class="badge-familia">Oriental</span>
@@ -640,7 +684,7 @@
       </div>
 
       <!-- 10 -->
-      <div class="card">
+      <div class="card" data-nombre="The Most Wanted">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="The Most Wanted" class="producto-img">
         <h3>The Most Wanted</h3>
         <span class="badge-familia">Especiada</span>
@@ -654,7 +698,7 @@
       </div>
 
       <!-- 11 -->
-      <div class="card">
+      <div class="card" data-nombre="Bad Boy Cobalt">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bad Boy Cobalt" class="producto-img">
         <h3>Bad Boy Cobalt</h3>
         <span class="badge-familia">Aromática</span>
@@ -668,7 +712,7 @@
       </div>
 
       <!-- 12 -->
-      <div class="card">
+      <div class="card" data-nombre="Y Le Parfum">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum" class="producto-img">
         <h3>Y Le Parfum</h3>
         <span class="badge-familia">Fougère</span>
@@ -682,7 +726,7 @@
       </div>
 
       <!-- 13 -->
-      <div class="card">
+      <div class="card" data-nombre="Hawas Rasasi">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Hawas Rasasi" class="producto-img">
         <h3>Hawas Rasasi</h3>
         <span class="badge-familia">Acuática</span>
@@ -702,16 +746,21 @@
   <div id="modal-carrito">
     <div class="modal-contenido">
       <h3>Resumen de tu Carrito</h3>
-      <p id="modal-texto-items">Tienes 0 productos seleccionados.</p>
+      <div class="lista-carrito" id="lista-carrito">
+        <!-- Los productos se cargaran dinamicamente aqui -->
+      </div>
+      <div class="modal-total">
+        Total: <span id="modal-total-precio">$0.00</span>
+      </div>
       <button class="btn-finalizar" onclick="finalizarPedido()">Finalizar pedido</button>
       <button class="btn-cerrar-modal" onclick="cerrarCarrito()">Seguir comprando</button>
     </div>
   </div>
 
   <script>
-    let cantidadCarrito = 0;
+    let carrito = [];
 
-    // Cargar datos guardados en el navegador al iniciar la página
+    // Cargar datos guardados al iniciar la pagina
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
         const intro = document.getElementById('pantalla-intro');
@@ -720,12 +769,11 @@
         }
       }
 
-      // Recuperar del almacenamiento local (localStorage) para que no se borren al recargar
+      // Recuperar carrito guardado en localStorage
       const carritoGuardado = localStorage.getItem('decantAMS_carrito');
       if (carritoGuardado) {
-        cantidadCarrito = parseInt(carritoGuardado);
-        document.getElementById('carrito-contador').innerText = cantidadCarrito;
-        document.getElementById('modal-texto-items').innerText = `Tienes ${cantidadCarrito} producto(s) en tu carrito.`;
+        carrito = JSON.parse(carritoGuardado);
+        actualizarCarritoUI();
       }
     });
 
@@ -753,16 +801,18 @@
     function agregarAlCarrito(event) {
       const boton = event.target;
       const card = boton.closest('.card');
+      const nombre = card.getAttribute('data-nombre');
       const imgProducto = card.querySelector('.producto-img');
+      const btnActivo = card.querySelector('.medida-btn.active');
+      const medida = btnActivo ? btnActivo.innerText : '5ml';
+      const precioDiv = card.querySelector('.precio-dinamico');
+      const precio = parseFloat(precioDiv.innerText.replace('$', ''));
       const carritoBtn = document.getElementById('carrito-btn');
-      const contador = document.getElementById('carrito-contador');
 
-      // Incrementar y guardar en localStorage
-      cantidadCarrito++;
-      contador.innerText = cantidadCarrito;
-      localStorage.setItem('decantAMS_carrito', cantidadCarrito);
-      document.getElementById('modal-texto-items').innerText = `Tienes ${cantidadCarrito} producto(s) en tu carrito.`;
-      
+      // Agregar producto al array
+      carrito.push({ nombre, medida, precio });
+      guardarYActualizar();
+
       // Animación de pulso
       carritoBtn.classList.add('cart-pulse');
       setTimeout(() => {
@@ -794,24 +844,63 @@
       }, 850);
     }
 
-    // Funciones para abrir y cerrar el modal del carrito
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      guardarYActualizar();
+    }
+
+    function guardarYActualizar() {
+      localStorage.setItem('decantAMS_carrito', JSON.stringify(carrito));
+      actualizarCarritoUI();
+    }
+
+    function actualizarCarritoUI() {
+      const contador = document.getElementById('carrito-contador');
+      const listaHTML = document.getElementById('lista-carrito');
+      const totalHTML = document.getElementById('modal-total-precio');
+
+      contador.innerText = carrito.length;
+
+      if (carrito.length === 0) {
+        listaHTML.innerHTML = '<p style="text-align:center; color:#888; font-size:0.8rem; padding: 10px 0;">Tu carrito está vacío.</p>';
+        totalHTML.innerText = '$0.00';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      carrito.forEach((item, index) => {
+        total += item.precio;
+        html += `
+          <div class="item-carrito">
+            <div>${item.nombre} <span>(${item.medida})</span></div>
+            <div>
+              $${item.precio.toFixed(2)} 
+              <button class="btn-eliminar-item" onclick="eliminarDelCarrito(${index})">✖</button>
+            </div>
+          </div>
+        `;
+      });
+
+      listaHTML.innerHTML = html;
+      totalHTML.innerText = `$${total.toFixed(2)}`;
+    }
+
     function abrirCarrito() {
-      const modal = document.getElementById('modal-carrito');
-      modal.style.display = 'flex';
+      document.getElementById('modal-carrito').style.display = 'flex';
     }
 
     function cerrarCarrito() {
-      const modal = document.getElementById('modal-carrito');
-      modal.style.display = 'none';
+      document.getElementById('modal-carrito').style.display = 'none';
     }
 
     function finalizarPedido() {
-      if (cantidadCarrito === 0) {
+      if (carrito.length === 0) {
         alert("¡Tu carrito está vacío!");
         return;
       }
-      alert("¡Redirigiendo al sistema de pago y WhatsApp para finalizar tu pedido!");
-      // Aquí puedes programar el enlace directo a WhatsApp con los productos
+      alert("¡Redirigiendo para procesar tu pedido de decants!");
     }
   </script>
 
