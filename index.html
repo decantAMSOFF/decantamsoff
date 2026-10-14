@@ -302,7 +302,6 @@
       text-overflow: ellipsis;
     }
 
-    /* Contenedor de Familia Olfativa y Botón de Info */
     .info-badge-container {
       display: flex;
       justify-content: center;
@@ -421,7 +420,7 @@
       box-shadow: 0 0 15px #00f3ff;
     }
 
-    /* Modal General para Carrito e Info de Perfume */
+    /* Modal / Mini Ventana General */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -467,7 +466,7 @@
 
     /* Lista de productos dentro del modal carrito */
     .lista-carrito {
-      max-height: 220px;
+      max-height: 200px;
       overflow-y: auto;
       margin-bottom: 15px;
       text-align: left;
@@ -525,6 +524,7 @@
       text-transform: uppercase;
       box-shadow: 0 0 10px rgba(188, 19, 254, 0.6);
       transition: 0.3s;
+      margin-bottom: 8px;
     }
 
     .btn-modal-accion:hover {
@@ -541,13 +541,40 @@
       font-weight: bold;
       font-size: 0.8rem;
       cursor: pointer;
-      margin-top: 10px;
       transition: 0.3s;
     }
 
     .btn-modal-cerrar:hover {
       background: #ff0055;
       color: #fff;
+    }
+
+    /* Estilos para los 3 botones de pago */
+    .pago-opciones {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-pago {
+      background: rgba(0, 243, 255, 0.1);
+      color: #00f3ff;
+      border: 1px solid #00f3ff;
+      padding: 10px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: 0.3s;
+      box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
+    }
+
+    .btn-pago:hover {
+      background: #00f3ff;
+      color: #050508;
+      box-shadow: 0 0 15px #00f3ff;
     }
   </style>
 </head>
@@ -600,7 +627,7 @@
         <h3>Perry Ellis Love</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Floral</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Perry Ellis Love', 'Una fragancia floral luminosa y romántica con notas frescas de salida, un corazón floral vibrante y un fondo suave almizclado. Ideal para uso diario y ocasiones especiales.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Perry Ellis Love', 'Una fragancia floral luminosa y romántica con notas frescas de salida, un corazón floral vibrante y un fondo suave almizclado.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 140, 350)">5ml</button>
@@ -617,7 +644,7 @@
         <h3>Nautica Classic</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Amaderado</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Nautica Classic', 'Clásico amaderado y fresco. Destaca por sus acordes cítricos combinados con notas verdes y maderas cálidas que brindan una sensación varonil y limpia.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Nautica Classic', 'Clásico amaderado y fresco. Destaca por sus acordes cítricos combinados con notas verdes y maderas cálidas.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 50, 100, 250)">5ml</button>
@@ -634,7 +661,7 @@
         <h3>Afnan 9pm</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Oriental</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Afnan 9pm', 'Una bestia nocturna de la perfumería oriental. Notas dulces, avainilladas y especiadas que garantizan una estela imponente y una duración brutal en fiestas o salidas de noche.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Afnan 9pm', 'Una bestia nocturna de la perfumería oriental. Notas dulces, avainilladas y especiadas que garantizan una estela imponente.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 80, 160, 400)">5ml</button>
@@ -651,7 +678,7 @@
         <h3>Eros Versace</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Fougère</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Eros Versace', 'Inspirado en el dios del amor, combina frescura vibrante de menta y manzana verde con una sensualidad profunda de haba tonka y vainilla ambarina.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Eros Versace', 'Inspirado en el dios del amor, combina frescura vibrante de menta y manzana verde con una sensualidad profunda de haba tonka.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
@@ -668,7 +695,7 @@
         <h3>Club de Nuit</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Amaderada</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Club de Nuit', 'Potente fragancia amaderada con un inicio cítrico ahumado inconfundible y un secado elegante de almizcle, pachuli y vainilla. El rey de los cumplidos.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Club de Nuit', 'Potente fragancia amaderada con un inicio cítrico ahumado inconfundible y un secado elegante. El rey de los cumplidos.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
@@ -685,7 +712,7 @@
         <h3>Bleu de Chanel</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Aromática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Bleu de Chanel', 'Sofisticación pura. Un aroma aromático amaderado que mezcla la frescura picante del limón y la menta con la elegancia profunda del incienso y las maderas secas.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Bleu de Chanel', 'Sofisticación pura. Un aroma aromático amaderado que mezcla la frescura picante del limón y la menta con incienso.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
@@ -702,7 +729,7 @@
         <h3>Sauvage Dior</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Cítrica</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Sauvage Dior', 'Radicalmente fresco, crudo y noble a la vez. Notas de bergamota de Calabria jugosa y pimienta picante que dan paso a un fondo ambarino y magnético.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Sauvage Dior', 'Radicalmente fresco, crudo y noble. Notas de bergamota de Calabria jugosa y pimienta picante.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
@@ -719,7 +746,7 @@
         <h3>1 Million Lucky</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Ambarina</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('1 Million Lucky', 'Una explosión adictiva de ciruela verde, notas ozónicas y avellana combinadas con maderas ambarinas. Vibrante, juvenil y sumamente atrayente.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('1 Million Lucky', 'Una explosión adictiva de ciruela verde, notas ozónicas y avellana combinadas con maderas ambarinas.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 95, 190, 475)">5ml</button>
@@ -736,7 +763,7 @@
         <h3>Le Male Le Parfum</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Oriental</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Le Male Le Parfum', 'Elegancia magnética con una salida especiada de cardamomo, corazón de lavanda e iris, y un fondo de vainilla oriental cálida y envolvente.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Le Male Le Parfum', 'Elegancia magnética con una salida especiada de cardamomo, corazón de lavanda e iris, y un fondo de vainilla.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
@@ -753,7 +780,7 @@
         <h3>The Most Wanted</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Especiada</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('The Most Wanted', 'Intensa y seductora con acorde de jengibre picante, madera ambarina y un toque dulce de Bourbon de vainilla. Perfecta para conquistar.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('The Most Wanted', 'Intensa y seductora con acorde de jengibre picante, madera ambarina y un toque dulce de vainilla.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 105, 210, 525)">5ml</button>
@@ -770,7 +797,7 @@
         <h3>Bad Boy Cobalt</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Aromática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Bad Boy Cobalt', 'Una fragancia energizante y audaz con notas minerales, lavanda fresca y un toque sutil de ciruela y trufa negra. Moderna y vibrante.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Bad Boy Cobalt', 'Una fragancia energizante y audaz con notas minerales, lavanda fresca y un toque sutil de ciruela.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
@@ -787,7 +814,7 @@
         <h3>Y Le Parfum</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Fougère</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Y Le Parfum', 'Intensa y oscura. Una mezcla poderosa de lavanda francesa, geranio y un fondo profundo de cedro e incienso. Misterio y elegancia en un decant.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Y Le Parfum', 'Intensa y oscura. Mezcla poderosa de lavanda francesa, geranio y un fondo profundo de cedro e incienso.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
@@ -804,7 +831,7 @@
         <h3>Hawas Rasasi</h3>
         <div class="info-badge-container">
           <span class="badge-familia">Acuática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Hawas Rasasi', 'Frescura acuática frutal con notas de manzana, bergamota y canela, respaldada por ámbar gris. Un imán de cumplidos por su rendimiento brutal.')">i</button>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Hawas Rasasi', 'Frescura acuática frutal con notas de manzana, bergamota y canela, respaldada por ámbar gris. Alto rendimiento.')">i</button>
         </div>
         <div class="medidas-container">
           <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
@@ -818,16 +845,30 @@
     </div>
   </section>
 
-  <!-- MODAL / MINI VENTANA DE CARRITO -->
+  <!-- MODAL / MINI VENTANA DE CARRITO Y PAGOS -->
   <div id="modal-carrito" class="modal-overlay">
     <div class="modal-contenido">
-      <h3>Resumen de tu Carrito</h3>
-      <div class="lista-carrito" id="lista-carrito"></div>
-      <div class="modal-total">
-        Total: <span id="modal-total-precio">$0.00</span>
+      <div id="seccion-resumen-carrito">
+        <h3>Resumen de tu Carrito</h3>
+        <div class="lista-carrito" id="lista-carrito"></div>
+        <div class="modal-total">
+          Total: <span id="modal-total-precio">$0.00</span>
+        </div>
+        <button class="btn-modal-accion" onclick="mostrarOpcionesPago()">Finalizar pedido</button>
+        <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
       </div>
-      <button class="btn-modal-accion" onclick="finalizarPedido()">Finalizar pedido</button>
-      <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
+
+      <!-- SECCIÓN DE SELECCIÓN DE PAGO (Oculta por defecto) -->
+      <div id="seccion-metodos-pago" style="display: none;">
+        <h3>REALIZA TU PAGO VÍA</h3>
+        <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 15px;">Selecciona tu método de pago preferido:</p>
+        <div class="pago-opciones">
+          <button class="btn-pago" onclick="seleccionarMetodoPago('Transferencia')">⚡ Transferencia</button>
+          <button class="btn-pago" onclick="seleccionarMetodoPago('Depósito')">🏦 Depósito</button>
+          <button class="btn-pago" onclick="seleccionarMetodoPago('Efectivo')">💵 Efectivo</button>
+        </div>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
+      </div>
     </div>
   </div>
 
@@ -966,6 +1007,9 @@
     }
 
     function abrirCarrito() {
+      // Mostrar resumen y ocultar opciones de pago al abrir
+      document.getElementById('seccion-resumen-carrito').style.display = 'block';
+      document.getElementById('seccion-metodos-pago').style.display = 'none';
       document.getElementById('modal-carrito').style.display = 'flex';
     }
 
@@ -973,18 +1017,30 @@
       document.getElementById(modalId).style.display = 'none';
     }
 
-    function mostrarInfo(nombre, descripcion) {
-      document.getElementById('info-titulo').innerText = nombre;
-      document.getElementById('info-descripcion').innerText = descripcion;
-      document.getElementById('modal-info').style.display = 'flex';
-    }
-
-    function finalizarPedido() {
+    function mostrarOpcionesPago() {
       if (carrito.length === 0) {
         alert("¡Tu carrito está vacío!");
         return;
       }
-      alert("¡Redirigiendo para procesar tu pedido de decants!");
+      // Ocultar resumen y mostrar pantalla de métodos de pago
+      document.getElementById('seccion-resumen-carrito').style.display = 'none';
+      document.getElementById('seccion-metodos-pago').style.display = 'block';
+    }
+
+    function regresarAlCarrito() {
+      document.getElementById('seccion-resumen-carrito').style.display = 'block';
+      document.getElementById('seccion-metodos-pago').style.display = 'none';
+    }
+
+    function seleccionarMetodoPago(metodo) {
+      alert(`Has seleccionado pago por: ${metodo}. ¡Pronto integraremos el enlace final!`);
+      cerrarModal('modal-carrito');
+    }
+
+    function mostrarInfo(nombre, descripcion) {
+      document.getElementById('info-titulo').innerText = nombre;
+      document.getElementById('info-descripcion').innerText = descripcion;
+      document.getElementById('modal-info').style.display = 'flex';
     }
   </script>
 
