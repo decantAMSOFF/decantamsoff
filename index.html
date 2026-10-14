@@ -445,7 +445,8 @@
       text-align: center;
       box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
       position: relative;
-      max-height: 85vh;
+      max-height: 90vh;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
     }
@@ -466,7 +467,7 @@
 
     /* Lista de productos dentro del modal carrito */
     .lista-carrito {
-      max-height: 180px;
+      max-height: 160px;
       overflow-y: auto;
       margin-bottom: 15px;
       text-align: left;
@@ -577,7 +578,6 @@
       box-shadow: 0 0 15px #00f3ff;
     }
 
-    /* Detalles de Transferencia y Datos */
     .datos-pago-caja {
       background: #12121c;
       border: 1px solid #00f3ff;
@@ -600,8 +600,8 @@
     }
 
     .qr-oxxo-img {
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       object-fit: contain;
       border-radius: 8px;
       margin: 8px auto;
@@ -610,7 +610,58 @@
       box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
     }
 
-    /* Botón de WhatsApp */
+    /* Formulario de Envío */
+    .form-envio {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      margin-bottom: 12px;
+    }
+
+    .form-envio label {
+      font-size: 0.75rem;
+      color: #00f3ff;
+      font-weight: bold;
+    }
+
+    .form-envio input, .form-envio textarea {
+      background: #151520;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      width: 100%;
+    }
+
+    .form-envio input:focus, .form-envio textarea:focus {
+      border-color: #00f3ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
+    }
+
+    .file-input-container {
+      background: rgba(188, 19, 254, 0.1);
+      border: 1px dashed #bc13fe;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .file-input-container label {
+      font-size: 0.75rem;
+      color: #bc13fe;
+      cursor: pointer;
+      font-weight: bold;
+      display: block;
+    }
+
+    .file-input-container input {
+      display: none;
+    }
+
     .btn-whatsapp {
       background: #25d366;
       color: #fff;
@@ -624,7 +675,7 @@
       text-transform: uppercase;
       box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
       transition: 0.3s;
-      margin-top: 10px;
+      margin-top: 5px;
       text-decoration: none;
       display: inline-block;
     }
@@ -936,7 +987,7 @@
           <p>👤 <span>Nombre Titular:</span><br>╰┈➤ ADRIAN</p>
           <p>🏧 <span>CLABE INTERBANCARIA:</span><br>╰┈➤ 638180010066831760</p>
         </div>
-        <button class="btn-modal-accion" onclick="completarPedidoPago()">Ya realicé mi pago</button>
+        <button class="btn-modal-accion" onclick="mostrarFormularioEnvio('Transferencia')">Ya realicé mi pago</button>
         <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
@@ -944,23 +995,63 @@
       <div id="seccion-oxxo" style="display: none;">
         <h3>DEPÓSITO OXXO</h3>
         <p style="font-size: 0.78rem; color: #bbb; margin-bottom: 5px;">Escanea el código QR o dicta los números en caja:</p>
-        <!-- Asegúrate de subir tu QR con este nombre o cambiarlo aquí -->
         <img src="oxxo_qr.jpg" alt="QR OXXO" class="qr-oxxo-img" onerror="this.src='https://i.postimg.cc/P5g7t3mc/Perryellislove.png'">
         <div class="datos-pago-caja" style="text-align: center;">
           <p style="font-size: 0.75rem; color: #aaa; margin-bottom: 2px;">Número para dictar:</p>
           <p style="font-size: 0.95rem; font-weight: bold; color: #00f3ff; letter-spacing: 1px;">2242 1704 2009 1654</p>
         </div>
-        <button class="btn-modal-accion" onclick="completarPedidoPago()">Ya realicé mi depósito</button>
+        <button class="btn-modal-accion" onclick="mostrarFormularioEnvio('Depósito OXXO')">Ya realicé mi depósito</button>
         <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
       <!-- 5. EFECTIVO / ACORDAR ENTREGA -->
       <div id="seccion-efectivo" style="display: none;">
         <h3>PAGO EN EFECTIVO</h3>
-        <p style="font-size: 0.85rem; color: #e0e0e0; margin-bottom: 15px;">ACORDAR LA ENTREGA</p>
-        <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 15px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
+        <p style="font-size: 0.85rem; color: #e0e0e0; margin-bottom: 10px;">ACORDAR LA ENTREGA</p>
+        <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 12px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
         <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20quiero%20acordar%20la%20entrega%20de%20mi%20pedido%20en%20efectivo." target="_blank" class="btn-whatsapp">📲 Enviar mensaje a WhatsApp</a>
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+      </div>
+
+      <!-- 6. FORMULARIO DE DATOS DE ENVÍO -->
+      <div id="seccion-formulario" style="display: none;">
+        <h3>DATOS DE ENVÍO</h3>
+        <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 8px;">Completa tus datos para enviarlos por WhatsApp:</p>
+        
+        <div class="form-envio">
+          <label>Nombre:</label>
+          <input type="text" id="envio-nombre" placeholder="Tu nombre">
+          
+          <label>Apellido:</label>
+          <input type="text" id="envio-apellido" placeholder="Tu apellido">
+          
+          <label>Calle y número de casa:</label>
+          <input type="text" id="envio-calle" placeholder="Ej. Av. Juárez #123">
+          
+          <label>Colonia:</label>
+          <input type="text" id="envio-colonia" placeholder="Tu colonia">
+          
+          <label>Código Postal:</label>
+          <input type="text" id="envio-cp" placeholder="50000">
+          
+          <label>Ciudad:</label>
+          <input type="text" id="envio-ciudad" placeholder="Tu ciudad">
+          
+          <label>Estado:</label>
+          <input type="text" id="envio-estado" placeholder="Tu estado">
+          
+          <label>Referencias:</label>
+          <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
+        </div>
+
+        <div class="file-input-container">
+          <label>📎 Adjunta captura de tu comprobante (Opcional):</label>
+          <input type="file" id="envio-comprobante" accept="image/*">
+          <span id="nombre-archivo" style="font-size: 0.7rem; color: #aaa;">Ningún archivo seleccionado</span>
+        </div>
+
+        <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">📤 Enviar Pedido por WhatsApp</button>
+        <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar</button>
       </div>
 
     </div>
@@ -977,6 +1068,7 @@
 
   <script>
     let carrito = [];
+    let metodoPagoSeleccionado = '';
 
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
@@ -990,6 +1082,21 @@
       if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
         actualizarCarritoUI();
+      }
+
+      // Mostrar nombre del archivo seleccionado para comprobante
+      const inputArchivo = document.getElementById('envio-comprobante');
+      if(inputArchivo) {
+        inputArchivo.addEventListener('change', function() {
+          const spanNombre = document.getElementById('nombre-archivo');
+          if(this.files && this.files.length > 0) {
+            spanNombre.innerText = "Archivo: " + this.files[0].name;
+            spanNombre.style.color = "#00f3ff";
+          } else {
+            spanNombre.innerText = "Ningún archivo seleccionado";
+            spanNombre.style.color = "#aaa";
+          }
+        });
       }
     });
 
@@ -1116,6 +1223,7 @@
       document.getElementById('seccion-transferencia').style.display = 'none';
       document.getElementById('seccion-oxxo').style.display = 'none';
       document.getElementById('seccion-efectivo').style.display = 'none';
+      document.getElementById('seccion-formulario').style.display = 'none';
     }
 
     function mostrarOpcionesPago() {
@@ -1147,11 +1255,61 @@
       document.getElementById('seccion-efectivo').style.display = 'block';
     }
 
-    function completarPedidoPago() {
-      alert("¡Gracias por registrar tu pago! En breve nos pondremos en contacto contigo.");
+    function mostrarFormularioEnvio(metodo) {
+      metodoPagoSeleccionado = metodo;
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-formulario').style.display = 'block';
+    }
+
+    function enviarPedidoWhatsApp() {
+      const nombre = document.getElementById('envio-nombre').value.trim();
+      const apellido = document.getElementById('envio-apellido').value.trim();
+      const calle = document.getElementById('envio-calle').value.trim();
+      const colonia = document.getElementById('envio-colonia').value.trim();
+      const cp = document.getElementById('envio-cp').value.trim();
+      const ciudad = document.getElementById('envio-ciudad').value.trim();
+      const estado = document.getElementById('envio-estado').value.trim();
+      const referencias = document.getElementById('envio-referencias').value.trim();
+
+      if (!nombre || !apellido || !calle || !colonia || !cp || !ciudad || !estado) {
+        alert("Por favor completa los campos obligatorios de tu dirección de envío.");
+        return;
+      }
+
+      // Armar lista de productos
+      let detalleProductos = "";
+      let total = 0;
+      carrito.forEach(item => {
+        detalleProductos += `• ${item.nombre} (${item.medida}) - $${item.precio.toFixed(2)}\n`;
+        total += item.precio;
+      });
+
+      // Crear mensaje para WhatsApp
+      let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
+      mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
+      mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
+      mensaje += `💰 *TOTAL A PAGAR:* $${total.toFixed(2)}\n\n`;
+      mensaje += `👤 *CLIENTE:* ${nombre} ${apellido}\n`;
+      mensaje += `📍 *DIRECCIÓN DE ENVÍO:*\n`;
+      mensaje += `Calle y Núm: ${calle}\n`;
+      mensaje += `Colonia: ${colonia}\n`;
+      mensaje += `C.P.: ${cp}\n`;
+      mensaje += `Ciudad: ${ciudad}\n`;
+      mensaje += `Estado: ${estado}\n`;
+      mensaje += `Referencias: ${referencias || 'Ninguna'}\n\n`;
+      mensaje += `_Adjunto mi comprobante de pago._`;
+
+      const numeroWhatsApp = "527224580020";
+      const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+
+      // Limpiar carrito opcionalmente o dejarlo guardado
+      window.open(urlWhatsApp, '_blank');
+      
+      // Limpiar carrito y cerrar modal
       carrito = [];
       guardarYActualizar();
       cerrarModal('modal-carrito');
+      alert("¡Pedido generado con éxito! Adjunta tu comprobante en el chat de WhatsApp que se abrió.");
     }
 
     function mostrarInfo(nombre, descripcion) {
