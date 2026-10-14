@@ -270,7 +270,7 @@
       margin-bottom: 8px;
     }
 
-    /* Opciones de Mililitros No Cuadradas (Píldoras Ovaladas) */
+    /* Opciones de Mililitros con Animación al Seleccionar */
     .medidas-container {
       display: flex;
       justify-content: center;
@@ -283,19 +283,34 @@
       border: 1px solid #333;
       color: #aaa;
       padding: 3px 6px;
-      border-radius: 20px; /* Estilo píldora / óvalo */
+      border-radius: 20px;
       font-size: 0.7rem;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.25s ease;
       flex: 1;
       text-align: center;
     }
 
-    .medida-btn.active {
-      background: rgba(188, 19, 254, 0.25);
-      border-color: #bc13fe;
+    .medida-btn:hover {
+      border-color: #00f3ff;
       color: #fff;
-      box-shadow: 0 0 6px rgba(188, 19, 254, 0.5);
+    }
+
+    /* Animación activa al seleccionar la medida */
+    .medida-btn.active {
+      background: linear-gradient(135deg, rgba(0, 243, 255, 0.3), rgba(188, 19, 254, 0.3));
+      border-color: #00f3ff;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+      transform: scale(1.08);
+      animation: pulsoSeleccion 0.4s ease;
+    }
+
+    @keyframes pulsoSeleccion {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1.08); }
     }
 
     .precio-dinamico {
@@ -312,7 +327,7 @@
       border: 1px solid #00f3ff;
       width: 100%;
       padding: 8px 4px;
-      border-radius: 20px; /* Estilo botón fluido no cuadrado */
+      border-radius: 20px;
       font-weight: bold;
       font-size: 0.7rem;
       cursor: pointer;
@@ -375,9 +390,9 @@
         <h3>Perry Ellis Love</h3>
         <span class="badge-familia">Floral</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 140, 350)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 600)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 300, 600, 1500)">30ml</button>
         </div>
         <div class="precio-dinamico">$70.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -389,9 +404,9 @@
         <h3>Nautica Classic</h3>
         <span class="badge-familia">Amaderado</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 50, 100, 250)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 90, 180, 450)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 240, 480, 1200)">30ml</button>
         </div>
         <div class="precio-dinamico">$50.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -403,9 +418,9 @@
         <h3>Afnan 9pm</h3>
         <span class="badge-familia">Oriental</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 80, 160, 400)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 140, 280, 700)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 350, 700, 1750)">30ml</button>
         </div>
         <div class="precio-dinamico">$80.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -417,9 +432,9 @@
         <h3>Eros Versace</h3>
         <span class="badge-familia">Fougère</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 160, 320, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -431,9 +446,9 @@
         <h3>Club de Nuit</h3>
         <span class="badge-familia">Amaderada</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 750)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 380, 760, 1900)">30ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -445,9 +460,9 @@
         <h3>Bleu de Chanel</h3>
         <span class="badge-familia">Aromática</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 200, 400, 1000)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 500, 1000, 2500)">30ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -459,9 +474,9 @@
         <h3>Sauvage Dior</h3>
         <span class="badge-familia">Cítrica</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 180, 360, 900)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 450, 900, 2250)">30ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -473,9 +488,9 @@
         <h3>1 Million Lucky</h3>
         <span class="badge-familia">Ambarina</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 95, 190, 475)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 170, 340, 850)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 420, 840, 2100)">30ml</button>
         </div>
         <div class="precio-dinamico">$95.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -487,9 +502,9 @@
         <h3>Le Male Le Parfum</h3>
         <span class="badge-familia">Oriental</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 180, 360, 900)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 450, 900, 2250)">30ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -501,9 +516,9 @@
         <h3>The Most Wanted</h3>
         <span class="badge-familia">Especiada</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 105, 210, 525)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 190, 380, 950)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 480, 960, 2400)">30ml</button>
         </div>
         <div class="precio-dinamico">$105.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -515,9 +530,9 @@
         <h3>Bad Boy Cobalt</h3>
         <span class="badge-familia">Aromática</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 160, 320, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -529,9 +544,9 @@
         <h3>Y Le Parfum</h3>
         <span class="badge-familia">Fougère</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 200, 400, 1000)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 500, 1000, 2500)">30ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -543,9 +558,9 @@
         <h3>Hawas Rasasi</h3>
         <span class="badge-familia">Acuática</span>
         <div class="medidas-container">
-          <button class="medida-btn active">5ml</button>
-          <button class="medida-btn">10ml</button>
-          <button class="medida-btn">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 750)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 380, 760, 1900)">30ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -568,6 +583,22 @@
       const intro = document.getElementById('pantalla-intro');
       intro.classList.add('ocultar-intro');
       sessionStorage.setItem('tiendaAbierta', 'true');
+    }
+
+    // Función para manejar la selección de mililitros y actualizar el precio dinámicamente con animación
+    function seleccionarMedida(btn, precio5ml, precio10ml, precio30ml) {
+      const card = btn.closest('.card');
+      const botones = card.querySelectorAll('.medida-btn');
+      
+      botones.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const precioDiv = card.querySelector('.precio-dinamico');
+      let precioFinal = precio5ml;
+      if (btn.innerText.includes('10ml')) precioFinal = precio10ml;
+      if (btn.innerText.includes('30ml')) precioFinal = precio30ml;
+
+      precioDiv.innerText = `$${precioFinal.toFixed(2)}`;
     }
   </script>
 
