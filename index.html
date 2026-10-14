@@ -610,13 +610,13 @@
       box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
     }
 
-    /* Formulario de Envío */
+    /* Formulario de Envío y Advertencia */
     .form-envio {
       display: flex;
       flex-direction: column;
       gap: 8px;
       text-align: left;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .form-envio label {
@@ -641,25 +641,24 @@
       box-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
     }
 
-    .file-input-container {
-      background: rgba(188, 19, 254, 0.1);
-      border: 1px dashed #bc13fe;
+    .aviso-importante {
+      background: rgba(255, 0, 85, 0.12);
+      border: 1px solid #ff0055;
       padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      margin-bottom: 10px;
+      border-radius: 10px;
+      font-size: 0.73rem;
+      color: #ff99bb;
+      text-align: left;
+      margin-bottom: 12px;
+      line-height: 1.35;
+      box-shadow: 0 0 8px rgba(255, 0, 85, 0.2);
     }
 
-    .file-input-container label {
-      font-size: 0.75rem;
-      color: #bc13fe;
-      cursor: pointer;
-      font-weight: bold;
+    .aviso-importante strong {
+      color: #ff0055;
       display: block;
-    }
-
-    .file-input-container input {
-      display: none;
+      margin-bottom: 3px;
+      font-size: 0.78rem;
     }
 
     .btn-whatsapp {
@@ -1013,11 +1012,16 @@
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 6. FORMULARIO DE DATOS DE ENVÍO -->
+      <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA -->
       <div id="seccion-formulario" style="display: none;">
         <h3>DATOS DE ENVÍO</h3>
-        <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 8px;">Completa tus datos para enviarlos por WhatsApp:</p>
         
+        <!-- AVISO IMPORTANTE -->
+        <div class="aviso-importante">
+          <strong>⚠️ IMPORTANTE ⚠️</strong>
+          DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO ABAJO DE TUS DATOS. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.
+        </div>
+
         <div class="form-envio">
           <label>Nombre:</label>
           <input type="text" id="envio-nombre" placeholder="Tu nombre">
@@ -1042,12 +1046,6 @@
           
           <label>Referencias:</label>
           <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
-        </div>
-
-        <div class="file-input-container">
-          <label>📎 Adjunta captura de tu comprobante (Opcional):</label>
-          <input type="file" id="envio-comprobante" accept="image/*">
-          <span id="nombre-archivo" style="font-size: 0.7rem; color: #aaa;">Ningún archivo seleccionado</span>
         </div>
 
         <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">📤 Enviar Pedido por WhatsApp</button>
@@ -1082,21 +1080,6 @@
       if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
         actualizarCarritoUI();
-      }
-
-      // Mostrar nombre del archivo seleccionado para comprobante
-      const inputArchivo = document.getElementById('envio-comprobante');
-      if(inputArchivo) {
-        inputArchivo.addEventListener('change', function() {
-          const spanNombre = document.getElementById('nombre-archivo');
-          if(this.files && this.files.length > 0) {
-            spanNombre.innerText = "Archivo: " + this.files[0].name;
-            spanNombre.style.color = "#00f3ff";
-          } else {
-            spanNombre.innerText = "Ningún archivo seleccionado";
-            spanNombre.style.color = "#aaa";
-          }
-        });
       }
     });
 
@@ -1276,7 +1259,6 @@
         return;
       }
 
-      // Armar lista de productos
       let detalleProductos = "";
       let total = 0;
       carrito.forEach(item => {
@@ -1284,7 +1266,6 @@
         total += item.precio;
       });
 
-      // Crear mensaje para WhatsApp
       let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
       mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
       mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
@@ -1297,19 +1278,17 @@
       mensaje += `Ciudad: ${ciudad}\n`;
       mensaje += `Estado: ${estado}\n`;
       mensaje += `Referencias: ${referencias || 'Ninguna'}\n\n`;
-      mensaje += `_Adjunto mi comprobante de pago._`;
+      mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago enseguida.`;
 
       const numeroWhatsApp = "527224580020";
       const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
-      // Limpiar carrito opcionalmente o dejarlo guardado
       window.open(urlWhatsApp, '_blank');
       
-      // Limpiar carrito y cerrar modal
       carrito = [];
       guardarYActualizar();
       cerrarModal('modal-carrito');
-      alert("¡Pedido generado con éxito! Adjunta tu comprobante en el chat de WhatsApp que se abrió.");
+      alert("¡Pedido generado! Ahora manda tu comprobante de pago directo en el chat de WhatsApp.");
     }
 
     function mostrarInfo(nombre, descripcion) {
