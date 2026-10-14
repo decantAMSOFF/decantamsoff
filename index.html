@@ -572,10 +572,18 @@
       box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
     }
 
-    .btn-pago:hover {
+    .btn-pago:hover:not(:disabled) {
       background: #00f3ff;
       color: #050508;
       box-shadow: 0 0 15px #00f3ff;
+    }
+
+    .btn-pago:disabled {
+      background: rgba(100, 100, 100, 0.2);
+      color: #555;
+      border-color: #444;
+      cursor: not-allowed;
+      box-shadow: none;
     }
 
     .datos-pago-caja {
@@ -960,7 +968,9 @@
         <h3>Resumen de tu Carrito</h3>
         <div class="lista-carrito" id="lista-carrito"></div>
         <div class="modal-total">
-          Total: <span id="modal-total-precio">$0.00</span>
+          Subtotal: <span id="modal-subtotal">$0.00</span><br>
+          Envío: <span>+$150.00</span><br>
+          Total con Envío: <span id="modal-total-precio">$0.00</span>
         </div>
         <button class="btn-modal-accion" onclick="mostrarOpcionesPago()">Finalizar pedido</button>
         <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
@@ -971,10 +981,11 @@
         <h3>REALIZA TU PAGO VÍA</h3>
         <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 12px;">Selecciona tu método de pago:</p>
         <div class="pago-opciones">
-          <button class="btn-pago" onclick="mostrarTransferencia()">⚡ Transferencia</button>
-          <button class="btn-pago" onclick="mostrarDepositoOxxo()">🏦 Depósito (OXXO)</button>
-          <button class="btn-pago" onclick="mostrarEfectivo()">💵 Efectivo</button>
+          <button class="btn-pago" onclick="mostrarTransferencia()">⚡ Transferencia (+ $150 envío)</button>
+          <button class="btn-pago" onclick="mostrarDepositoOxxo()">🏦 Depósito (OXXO) (+ $150 envío)</button>
+          <button class="btn-pago" id="btn-pago-efectivo" onclick="mostrarEfectivo()">💵 Efectivo</button>
         </div>
+        <p id="aviso-efectivo-bloqueado" style="font-size: 0.72rem; color: #ff0055; margin-top: 8px; display: none;">* El pago en efectivo solo está disponible para pedidos de $250 o más.</p>
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
       </div>
 
@@ -1006,7 +1017,11 @@
       <!-- 5. EFECTIVO / ACORDAR ENTREGA -->
       <div id="seccion-efectivo" style="display: none;">
         <h3>PAGO EN EFECTIVO</h3>
-        <p style="font-size: 0.85rem; color: #e0e0e0; margin-bottom: 10px;">ACORDAR LA ENTREGA</p>
+        <!-- AVISO IMPORTANTE EFECTIVO -->
+        <div class="aviso-importante">
+          <strong>⚠️ IMPORTANTE ⚠️</strong>
+          PARA GARANTIZAR TU ENTREGA Y QUE SEA UNA COMPRA SEGURA, COMO ES EN EFECTIVO PEDIMOS 30% DE ADELANTO.
+        </div>
         <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 12px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
         <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20quiero%20acordar%20la%20entrega%20de%20mi%20pedido%20en%20efectivo." target="_blank" class="btn-whatsapp">📲 Enviar mensaje a WhatsApp</a>
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
@@ -1160,21 +1175,23 @@
     function actualizarCarritoUI() {
       const contador = document.getElementById('carrito-contador');
       const listaHTML = document.getElementById('lista-carrito');
+      const subtotalHTML = document.getElementById('modal-subtotal');
       const totalHTML = document.getElementById('modal-total-precio');
 
       contador.innerText = carrito.length;
 
       if (carrito.length === 0) {
         listaHTML.innerHTML = '<p style="text-align:center; color:#888; font-size:0.8rem; padding: 10px 0;">Tu carrito está vacío.</p>';
+        subtotalHTML.innerText = '$0.00';
         totalHTML.innerText = '$0.00';
         return;
       }
 
       let html = '';
-      let total = 0;
+      let subtotal = 0;
 
       carrito.forEach((item, index) => {
-        total += item.precio;
+        subtotal += item.precio;
         html += `
           <div class="item-carrito">
             <div>${item.nombre} <span>(${item.medida})</span></div>
@@ -1186,8 +1203,11 @@
         `;
       });
 
+      const totalConEnvio = subtotal + 150;
+
       listaHTML.innerHTML = html;
-      totalHTML.innerText = `$${total.toFixed(2)}`;
+      subtotalHTML.innerText = `$${subtotal.toFixed(2)}`;
+      totalHTML.innerText = `$${totalConEnvio.toFixed(2)}`;
     }
 
     function abrirCarrito() {
@@ -1214,6 +1234,20 @@
         alert("¡Tu carrito está vacío!");
         return;
       }
+
+      // Calcular subtotal para validar si se activa el efectivo ($250 o más)
+      let subtotal = carrito.reduce((acc, item) => acc + item.precio, 0);
+      const btnEfectivo = document.getElementById('btn-pago-efectivo');
+      const avisoEfectivo = document.getElementById('aviso-efectivo-bloqueado');
+
+      if (subtotal >= 250) {
+        btnEfectivo.disabled = false;
+        avisoEfectivo.style.display = 'none';
+      } else {
+        btnEfectivo.disabled = true;
+        avisoEfectivo.style.display = 'block';
+      }
+
       ocultarTodasSeccionesModal();
       document.getElementById('seccion-metodos-pago').style.display = 'block';
     }
@@ -1260,16 +1294,20 @@
       }
 
       let detalleProductos = "";
-      let total = 0;
+      let subtotal = 0;
       carrito.forEach(item => {
         detalleProductos += `• ${item.nombre} (${item.medida}) - $${item.precio.toFixed(2)}\n`;
-        total += item.precio;
+        subtotal += item.precio;
       });
+
+      let totalConEnvio = subtotal + 150;
 
       let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
       mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
       mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
-      mensaje += `💰 *TOTAL A PAGAR:* $${total.toFixed(2)}\n\n`;
+      mensaje += `subtotal: $${subtotal.toFixed(2)}\n`;
+      mensaje += `🚚 *Envío:* $150.00\n`;
+      mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
       mensaje += `👤 *CLIENTE:* ${nombre} ${apellido}\n`;
       mensaje += `📍 *DIRECCIÓN DE ENVÍO:*\n`;
       mensaje += `Calle y Núm: ${calle}\n`;
