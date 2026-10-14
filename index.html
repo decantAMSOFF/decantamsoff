@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -329,17 +328,17 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE INTRO -->
+  <!-- PANTALLA DE INTRO CON LOGO REAL -->
   <div id="pantalla-intro" onclick="entrarTienda()">
     <div class="logo-intro-container">
-      <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="decantAMS Logo">
+      <img src="logo.png" alt="decantAMS Logo">
     </div>
     <div class="texto-intro">
       ⚡ Toca el logo para entrar al inicio ⚡
     </div>
   </div>
 
-  <!-- HEADER -->
+  <!-- HEADER CON LOGO REAL EN EL CENTRO -->
   <header>
     <h1>decantAMS</h1>
     <div class="header-content">
@@ -348,7 +347,7 @@
       </nav>
       
       <div class="header-logo-wrapper">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Logo">
+        <img src="logo.png" alt="Logo">
       </div>
 
       <nav>
@@ -448,7 +447,7 @@
       <!-- 7 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior">
-        <h3>Sauvage Dior</h3>
+        ### Sauvage Dior
         <span class="badge-familia">Cítrica</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
@@ -540,7 +539,6 @@
   </section>
 
   <script>
-    // Verificar si ya se habia entrado a la tienda en esta sesión
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
         const intro = document.getElementById('pantalla-intro');
@@ -553,7 +551,6 @@
     function entrarTienda() {
       const intro = document.getElementById('pantalla-intro');
       intro.classList.add('ocultar-intro');
-      // Guardar en la memoria del navegador que ya se abrió la tienda
       sessionStorage.setItem('tiendaAbierta', 'true');
     }
   </script>
