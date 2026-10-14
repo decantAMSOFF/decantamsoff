@@ -124,7 +124,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
     }
 
     nav a {
@@ -140,11 +140,40 @@
       text-shadow: 0 0 8px #bc13fe;
     }
 
-    /* Animación del carrito al recibir un producto */
+    /* Estilo del Botón de Carrito con Ícono y Contador Neón */
+    .carrito-btn-icon {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #00f3ff;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+      padding: 4px;
+    }
+
+    .carrito-btn-icon:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #00f3ff;
+    }
+
+    .carrito-contador {
+      position: absolute;
+      top: -5px;
+      right: -10px;
+      background: #bc13fe;
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: bold;
+      padding: 1px 5px;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #bc13fe;
+    }
+
     .cart-pulse {
       animation: pulsoCarrito 0.4s ease;
-      color: #00f3ff !important;
-      text-shadow: 0 0 10px #00f3ff;
     }
 
     @keyframes pulsoCarrito {
@@ -360,6 +389,84 @@
       transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
       box-shadow: 0 0 15px #00f3ff;
     }
+
+    /* Modal / Mini Ventana de Finalizar Pedido */
+    #modal-carrito {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 2, 8, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal-contenido {
+      background: #0d0d16;
+      border: 2px solid #00f3ff;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 380px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+      position: relative;
+    }
+
+    .modal-contenido h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px #00f3ff;
+    }
+
+    .modal-contenido p {
+      color: #bbb;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-finalizar {
+      background: linear-gradient(135deg, #00f3ff, #bc13fe);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(188, 19, 254, 0.6);
+      transition: 0.3s;
+    }
+
+    .btn-finalizar:hover {
+      box-shadow: 0 0 20px #00f3ff;
+    }
+
+    .btn-cerrar-modal {
+      background: transparent;
+      color: #ff0055;
+      border: 1px solid #ff0055;
+      width: 100%;
+      padding: 8px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .btn-cerrar-modal:hover {
+      background: #ff0055;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -387,7 +494,11 @@
       </div>
 
       <nav>
-        <a href="#catalogo" id="carrito-link">Carrito (0)</a>
+        <!-- Ícono de Carrito Limpio con Contador Dinámico -->
+        <button class="carrito-btn-icon" onclick="abrirCarrito()" id="carrito-btn">
+          🛒
+          <span class="carrito-contador" id="carrito-contador">0</span>
+        </button>
       </nav>
     </div>
   </header>
@@ -587,15 +698,34 @@
     </div>
   </section>
 
+  <!-- MODAL / MINI VENTANA DE CARRITO -->
+  <div id="modal-carrito">
+    <div class="modal-contenido">
+      <h3>Resumen de tu Carrito</h3>
+      <p id="modal-texto-items">Tienes 0 productos seleccionados.</p>
+      <button class="btn-finalizar" onclick="finalizarPedido()">Finalizar pedido</button>
+      <button class="btn-cerrar-modal" onclick="cerrarCarrito()">Seguir comprando</button>
+    </div>
+  </div>
+
   <script>
     let cantidadCarrito = 0;
 
+    // Cargar datos guardados en el navegador al iniciar la página
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
         const intro = document.getElementById('pantalla-intro');
         if (intro) {
           intro.style.display = 'none';
         }
+      }
+
+      // Recuperar del almacenamiento local (localStorage) para que no se borren al recargar
+      const carritoGuardado = localStorage.getItem('decantAMS_carrito');
+      if (carritoGuardado) {
+        cantidadCarrito = parseInt(carritoGuardado);
+        document.getElementById('carrito-contador').innerText = cantidadCarrito;
+        document.getElementById('modal-texto-items').innerText = `Tienes ${cantidadCarrito} producto(s) en tu carrito.`;
       }
     });
 
@@ -620,36 +750,36 @@
       precioDiv.innerText = `$${precioFinal.toFixed(2)}`;
     }
 
-    // Lógica para el vuelo del perfume al carrito y actualización del contador
     function agregarAlCarrito(event) {
       const boton = event.target;
       const card = boton.closest('.card');
       const imgProducto = card.querySelector('.producto-img');
-      const carritoLink = document.getElementById('carrito-link');
+      const carritoBtn = document.getElementById('carrito-btn');
+      const contador = document.getElementById('carrito-contador');
 
-      // Incrementar contador
+      // Incrementar y guardar en localStorage
       cantidadCarrito++;
-      carritoLink.innerText = `Carrito (${cantidadCarrito})`;
+      contador.innerText = cantidadCarrito;
+      localStorage.setItem('decantAMS_carrito', cantidadCarrito);
+      document.getElementById('modal-texto-items').innerText = `Tienes ${cantidadCarrito} producto(s) en tu carrito.`;
       
-      // Aplicar animación de pulso al carrito
-      carritoLink.classList.add('cart-pulse');
+      // Animación de pulso
+      carritoBtn.classList.add('cart-pulse');
       setTimeout(() => {
-        carritoLink.classList.remove('cart-pulse');
+        carritoBtn.classList.remove('cart-pulse');
       }, 400);
 
-      // Crear imagen clonada para la animación de vuelo
+      // Animación de vuelo hacia el carrito
       const flyImage = document.createElement('img');
       flyImage.src = imgProducto.src;
       flyImage.className = 'fly-img';
 
-      // Posición inicial (desde el producto)
       const rectImg = imgProducto.getBoundingClientRect();
       flyImage.style.top = `${rectImg.top}px`;
       flyImage.style.left = `${rectImg.left}px`;
       document.body.appendChild(flyImage);
 
-      // Posición final (hacia el enlace del carrito en el header)
-      const rectCarrito = carritoLink.getBoundingClientRect();
+      const rectCarrito = carritoBtn.getBoundingClientRect();
 
       setTimeout(() => {
         flyImage.style.top = `${rectCarrito.top}px`;
@@ -659,10 +789,29 @@
         flyImage.style.opacity = '0.3';
       }, 50);
 
-      // Borrar el elemento flotante al terminar la animación
       setTimeout(() => {
         flyImage.remove();
       }, 850);
+    }
+
+    // Funciones para abrir y cerrar el modal del carrito
+    function abrirCarrito() {
+      const modal = document.getElementById('modal-carrito');
+      modal.style.display = 'flex';
+    }
+
+    function cerrarCarrito() {
+      const modal = document.getElementById('modal-carrito');
+      modal.style.display = 'none';
+    }
+
+    function finalizarPedido() {
+      if (cantidadCarrito === 0) {
+        alert("¡Tu carrito está vacío!");
+        return;
+      }
+      alert("¡Redirigiendo al sistema de pago y WhatsApp para finalizar tu pedido!");
+      // Aquí puedes programar el enlace directo a WhatsApp con los productos
     }
   </script>
 
