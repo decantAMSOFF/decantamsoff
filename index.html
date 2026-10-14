@@ -270,10 +270,11 @@
       margin-bottom: 8px;
     }
 
+    /* Opciones de Mililitros No Cuadradas (Píldoras Ovaladas) */
     .medidas-container {
       display: flex;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
       margin-bottom: 8px;
     }
 
@@ -281,18 +282,20 @@
       background: #151520;
       border: 1px solid #333;
       color: #aaa;
-      padding: 4px 8px;
-      border-radius: 5px;
-      font-size: 0.75rem;
+      padding: 3px 6px;
+      border-radius: 20px; /* Estilo píldora / óvalo */
+      font-size: 0.7rem;
       cursor: pointer;
       transition: 0.3s;
+      flex: 1;
+      text-align: center;
     }
 
     .medida-btn.active {
-      background: rgba(188, 19, 254, 0.2);
+      background: rgba(188, 19, 254, 0.25);
       border-color: #bc13fe;
       color: #fff;
-      box-shadow: 0 0 5px rgba(188, 19, 254, 0.4);
+      box-shadow: 0 0 6px rgba(188, 19, 254, 0.5);
     }
 
     .precio-dinamico {
@@ -309,7 +312,7 @@
       border: 1px solid #00f3ff;
       width: 100%;
       padding: 8px 4px;
-      border-radius: 6px;
+      border-radius: 20px; /* Estilo botón fluido no cuadrado */
       font-weight: bold;
       font-size: 0.7rem;
       cursor: pointer;
@@ -328,7 +331,7 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE INTRO CON LOGO REAL -->
+  <!-- PANTALLA DE INTRO -->
   <div id="pantalla-intro" onclick="entrarTienda()">
     <div class="logo-intro-container">
       <img src="logo.png" alt="decantAMS Logo">
@@ -338,7 +341,7 @@
     </div>
   </div>
 
-  <!-- HEADER CON LOGO REAL EN EL CENTRO -->
+  <!-- HEADER -->
   <header>
     <h1>decantAMS</h1>
     <div class="header-content">
@@ -374,6 +377,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$70.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -387,6 +391,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$50.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -400,6 +405,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$80.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -413,6 +419,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -426,6 +433,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -439,6 +447,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -447,11 +456,12 @@
       <!-- 7 -->
       <div class="card">
         <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior">
-        ### Sauvage Dior
+        <h3>Sauvage Dior</h3>
         <span class="badge-familia">Cítrica</span>
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -465,6 +475,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$95.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -478,6 +489,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$100.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -491,6 +503,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$105.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -504,6 +517,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$90.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -517,6 +531,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$110.00</div>
         <button class="btn-agregar">Agregar</button>
@@ -530,6 +545,7 @@
         <div class="medidas-container">
           <button class="medida-btn active">5ml</button>
           <button class="medida-btn">10ml</button>
+          <button class="medida-btn">30ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar">Agregar</button>
