@@ -466,7 +466,7 @@
 
     /* Lista de productos dentro del modal carrito */
     .lista-carrito {
-      max-height: 200px;
+      max-height: 180px;
       overflow-y: auto;
       margin-bottom: 15px;
       text-align: left;
@@ -549,12 +549,12 @@
       color: #fff;
     }
 
-    /* Estilos para los 3 botones de pago */
+    /* Estilos para los botones de pago */
     .pago-opciones {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     .btn-pago {
@@ -575,6 +575,62 @@
       background: #00f3ff;
       color: #050508;
       box-shadow: 0 0 15px #00f3ff;
+    }
+
+    /* Detalles de Transferencia y Datos */
+    .datos-pago-caja {
+      background: #12121c;
+      border: 1px solid #00f3ff;
+      padding: 12px;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #e0e0e0;
+      margin-bottom: 12px;
+      box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.1);
+    }
+
+    .datos-pago-caja p {
+      margin-bottom: 6px;
+    }
+
+    .datos-pago-caja span {
+      color: #00f3ff;
+      font-weight: bold;
+    }
+
+    .qr-oxxo-img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin: 8px auto;
+      display: block;
+      border: 2px solid #bc13fe;
+      box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+    }
+
+    /* Botón de WhatsApp */
+    .btn-whatsapp {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+      transition: 0.3s;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-whatsapp:hover {
+      box-shadow: 0 0 20px #25d366;
     }
   </style>
 </head>
@@ -848,6 +904,8 @@
   <!-- MODAL / MINI VENTANA DE CARRITO Y PAGOS -->
   <div id="modal-carrito" class="modal-overlay">
     <div class="modal-contenido">
+      
+      <!-- 1. RESUMEN DEL CARRITO -->
       <div id="seccion-resumen-carrito">
         <h3>Resumen de tu Carrito</h3>
         <div class="lista-carrito" id="lista-carrito"></div>
@@ -858,17 +916,53 @@
         <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
       </div>
 
-      <!-- SECCIÓN DE SELECCIÓN DE PAGO (Oculta por defecto) -->
+      <!-- 2. SELECCIÓN DE MÉTODOS DE PAGO -->
       <div id="seccion-metodos-pago" style="display: none;">
         <h3>REALIZA TU PAGO VÍA</h3>
-        <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 15px;">Selecciona tu método de pago preferido:</p>
+        <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 12px;">Selecciona tu método de pago:</p>
         <div class="pago-opciones">
-          <button class="btn-pago" onclick="seleccionarMetodoPago('Transferencia')">⚡ Transferencia</button>
-          <button class="btn-pago" onclick="seleccionarMetodoPago('Depósito')">🏦 Depósito</button>
-          <button class="btn-pago" onclick="seleccionarMetodoPago('Efectivo')">💵 Efectivo</button>
+          <button class="btn-pago" onclick="mostrarTransferencia()">⚡ Transferencia</button>
+          <button class="btn-pago" onclick="mostrarDepositoOxxo()">🏦 Depósito (OXXO)</button>
+          <button class="btn-pago" onclick="mostrarEfectivo()">💵 Efectivo</button>
         </div>
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
       </div>
+
+      <!-- 3. DATOS DE TRANSFERENCIA -->
+      <div id="seccion-transferencia" style="display: none;">
+        <h3>ᥫ𝐓 𝐑 𝐀 𝐍 𝐒 𝐅 𝐄 𝐑 𝐄 𝐍 𝐂 𝐈 𝐀 𝐒ᥫ</h3>
+        <div class="datos-pago-caja">
+          <p>🏦 <span>Banco:</span><br>╰┈➤ NU BANK</p>
+          <p>👤 <span>Nombre Titular:</span><br>╰┈➤ ADRIAN</p>
+          <p>🏧 <span>CLABE INTERBANCARIA:</span><br>╰┈➤ 638180010066831760</p>
+        </div>
+        <button class="btn-modal-accion" onclick="completarPedidoPago()">Ya realicé mi pago</button>
+        <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+      </div>
+
+      <!-- 4. DEPÓSITO OXXO CON QR -->
+      <div id="seccion-oxxo" style="display: none;">
+        <h3>DEPÓSITO OXXO</h3>
+        <p style="font-size: 0.78rem; color: #bbb; margin-bottom: 5px;">Escanea el código QR o dicta los números en caja:</p>
+        <!-- Asegúrate de subir tu QR con este nombre o cambiarlo aquí -->
+        <img src="oxxo_qr.jpg" alt="QR OXXO" class="qr-oxxo-img" onerror="this.src='https://i.postimg.cc/P5g7t3mc/Perryellislove.png'">
+        <div class="datos-pago-caja" style="text-align: center;">
+          <p style="font-size: 0.75rem; color: #aaa; margin-bottom: 2px;">Número para dictar:</p>
+          <p style="font-size: 0.95rem; font-weight: bold; color: #00f3ff; letter-spacing: 1px;">2242 1704 2009 1654</p>
+        </div>
+        <button class="btn-modal-accion" onclick="completarPedidoPago()">Ya realicé mi depósito</button>
+        <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+      </div>
+
+      <!-- 5. EFECTIVO / ACORDAR ENTREGA -->
+      <div id="seccion-efectivo" style="display: none;">
+        <h3>PAGO EN EFECTIVO</h3>
+        <p style="font-size: 0.85rem; color: #e0e0e0; margin-bottom: 15px;">ACORDAR LA ENTREGA</p>
+        <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 15px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
+        <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20quiero%20acordar%20la%20entrega%20de%20mi%20pedido%20en%20efectivo." target="_blank" class="btn-whatsapp">📲 Enviar mensaje a WhatsApp</a>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+      </div>
+
     </div>
   </div>
 
@@ -1007,9 +1101,8 @@
     }
 
     function abrirCarrito() {
-      // Mostrar resumen y ocultar opciones de pago al abrir
+      ocultarTodasSeccionesModal();
       document.getElementById('seccion-resumen-carrito').style.display = 'block';
-      document.getElementById('seccion-metodos-pago').style.display = 'none';
       document.getElementById('modal-carrito').style.display = 'flex';
     }
 
@@ -1017,23 +1110,47 @@
       document.getElementById(modalId).style.display = 'none';
     }
 
+    function ocultarTodasSeccionesModal() {
+      document.getElementById('seccion-resumen-carrito').style.display = 'none';
+      document.getElementById('seccion-metodos-pago').style.display = 'none';
+      document.getElementById('seccion-transferencia').style.display = 'none';
+      document.getElementById('seccion-oxxo').style.display = 'none';
+      document.getElementById('seccion-efectivo').style.display = 'none';
+    }
+
     function mostrarOpcionesPago() {
       if (carrito.length === 0) {
         alert("¡Tu carrito está vacío!");
         return;
       }
-      // Ocultar resumen y mostrar pantalla de métodos de pago
-      document.getElementById('seccion-resumen-carrito').style.display = 'none';
+      ocultarTodasSeccionesModal();
       document.getElementById('seccion-metodos-pago').style.display = 'block';
     }
 
     function regresarAlCarrito() {
+      ocultarTodasSeccionesModal();
       document.getElementById('seccion-resumen-carrito').style.display = 'block';
-      document.getElementById('seccion-metodos-pago').style.display = 'none';
     }
 
-    function seleccionarMetodoPago(metodo) {
-      alert(`Has seleccionado pago por: ${metodo}. ¡Pronto integraremos el enlace final!`);
+    function mostrarTransferencia() {
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-transferencia').style.display = 'block';
+    }
+
+    function mostrarDepositoOxxo() {
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-oxxo').style.display = 'block';
+    }
+
+    function mostrarEfectivo() {
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-efectivo').style.display = 'block';
+    }
+
+    function completarPedidoPago() {
+      alert("¡Gracias por registrar tu pago! En breve nos pondremos en contacto contigo.");
+      carrito = [];
+      guardarYActualizar();
       cerrarModal('modal-carrito');
     }
 
