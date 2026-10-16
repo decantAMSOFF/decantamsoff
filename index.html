@@ -296,10 +296,19 @@
     .card h3 {
       color: #fff;
       font-size: 0.9rem;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .genero-tag {
+      font-size: 0.65rem;
+      color: #bc13fe;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
     }
 
     .info-badge-container {
@@ -730,21 +739,184 @@
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
-  <!-- SECCIÓN DE CATÁLOGO (13 CARTAS) -->
+  <!-- SECCIÓN DE CATÁLOGO (14 CARTAS) -->
   <section id="catalogo">
-    <h2 class="section-title">Perfumes / Decants (13)</h2>
+    <h2 class="section-title">Perfumes / Decants (14)</h2>
     <div class="productos-grid">
       
       <!-- 1 -->
-      <div class="card" data-nombre="Perry Ellis Love">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love" class="producto-img">
-        <h3>Perry Ellis Love</h3>
+      <div class="card" data-nombre="Ramz Silver (Lattafa)">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Ramz Silver" class="producto-img">
+        <h3>Ramz Silver</h3>
+        <span class="genero-tag">Hombre</span>
         <div class="info-badge-container">
-          <span class="badge-familia">Floral</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Perry Ellis Love', 'Una fragancia floral luminosa y romántica con notas frescas de salida, un corazón floral vibrante y un fondo suave almizclado.')">i</button>
+          <span class="badge-familia">Ambar Vainilla</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Ramz Silver - Lattafa', 'Fragancia masculina con un acorde seductor de ámbar y vainilla, ideal para destacar en cualquier ocasión con notas dulces y especiadas.')">i</button>
         </div>
         <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 140, 350)">5ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 75, 130, 350)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 130, 260, 700)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 350, 700, 1750)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$75.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 2 -->
+      <div class="card" data-nombre="Ramz Gold (Lattafa)">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Ramz Gold" class="producto-img">
+        <h3>Ramz Gold</h3>
+        <span class="genero-tag">Mujer</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Frutal/Floral</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Ramz Gold - Lattafa', 'Aroma femenino vibrante y cautivador que combina notas frutales jugosas con un corazón floral elegante.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 75, 130, 350)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 130, 260, 700)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 350, 700, 1750)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$75.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 3 -->
+      <div class="card" data-nombre="Aoud Odyssey">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Aoud Odyssey" class="producto-img">
+        <h3>Aoud Odyssey</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Amaderada Especiada</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Aoud - Odyssey', 'Potente fragancia amaderada especiada, perfecta para quienes buscan profundidad, misterio y una estela imponente.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 330)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 660)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 330, 660, 1650)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 4 -->
+      <div class="card" data-nombre="Wild One Gold Edition Odyssey">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Wild One Gold Edition" class="producto-img">
+        <h3>Wild One Gold</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Fresco Especiado</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Wild One Gold Edition - Odyssey', 'Una mezcla dinámica de notas frescas y especiadas que proyectan energía, modernidad y carisma.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 330)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 660)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 330, 660, 1650)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 5 -->
+      <div class="card" data-nombre="Mandarin Sky Odyssey">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Mandarin Sky" class="producto-img">
+        <h3>Mandarin Sky</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Dulce Cítrico</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Mandarin Sky - Odyssey', 'Exquisita combinación de cítricos chispeantes con un toque dulce muy adictivo y sofisticado.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 150, 400)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$85.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 6 -->
+      <div class="card" data-nombre="Club de Nuit Sillage Armaf">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Sillage" class="producto-img">
+        <h3>CDN Sillage</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Almizcle Floral</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Club de Nuit Sillage - Armaf', 'Aroma fresco, metálico y limpio con almizcle, notas florales y maderas finas. Gran rendimiento.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 150, 400)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$85.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 7 -->
+      <div class="card" data-nombre="Club de Nuit Intense Man Armaf">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense Man" class="producto-img">
+        <h3>CDN Intense Man</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Amaderada Especiada</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Club de Nuit Intense Man - Armaf', 'El rey indiscutible de los cumplidos. Cítricos ahumados con un secado maderoso y masculino excepcional.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 150, 400)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$85.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 8 -->
+      <div class="card" data-nombre="Nautica Nautica">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic" class="producto-img">
+        <h3>Nautica Classic</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Amaderada Chipre</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Nautica - Nautica', 'Clásico fresco y limpio. Notas acuáticas y maderas que otorgan una sensación vigorizante todo el día.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 320)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 640)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 320, 640, 1600)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 9 -->
+      <div class="card" data-nombre="Now Woman Rave">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Now Woman" class="producto-img">
+        <h3>Now Woman</h3>
+        <span class="genero-tag">Mujer</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Frutal/Dulce</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Now woman - Rave', 'Fragancia femenina alegre, frutal y dulce, perfecta para destacar con un estilo jovial y vibrante.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 320)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 640)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 320, 640, 1600)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 10 -->
+      <div class="card" data-nombre="Strawberry Cheesecake Tubbees">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Strawberry Cheesecake" class="producto-img">
+        <h3>Strawberry Cheesecake</h3>
+        <span class="genero-tag">Mujer</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Frutal Gourmand</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Strawberry cheesecake - Tubbees', 'Deliciosa y divertida fragancia gourmand inspirada en el postre de tarta de fresa. Dulce y antojable.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 300)">5ml</button>
           <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 600)">10ml</button>
           <button class="medida-btn" onclick="seleccionarMedida(this, 300, 600, 1500)">30ml</button>
         </div>
@@ -752,205 +924,73 @@
         <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
       </div>
 
-      <!-- 2 -->
-      <div class="card" data-nombre="Nautica Classic">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Nautica Classic" class="producto-img">
-        <h3>Nautica Classic</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Amaderado</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Nautica Classic', 'Clásico amaderado y fresco. Destaca por sus acordes cítricos combinados con notas verdes y maderas cálidas.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 50, 100, 250)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 90, 180, 450)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 240, 480, 1200)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$50.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 3 -->
-      <div class="card" data-nombre="Afnan 9pm">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Afnan 9pm" class="producto-img">
-        <h3>Afnan 9pm</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Oriental</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Afnan 9pm', 'Una bestia nocturna de la perfumería oriental. Notas dulces, avainilladas y especiadas que garantizan una estela imponente.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 80, 160, 400)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 140, 280, 700)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 350, 700, 1750)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$80.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 4 -->
-      <div class="card" data-nombre="Eros Versace">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Eros Versace" class="producto-img">
-        <h3>Eros Versace</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Fougère</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Eros Versace', 'Inspirado en el dios del amor, combina frescura vibrante de menta y manzana verde con una sensualidad profunda de haba tonka.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 160, 320, 800)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$90.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 5 -->
-      <div class="card" data-nombre="Club de Nuit">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Club de Nuit Intense" class="producto-img">
-        <h3>Club de Nuit</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Amaderada</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Club de Nuit', 'Potente fragancia amaderada con un inicio cítrico ahumado inconfundible y un secado elegante. El rey de los cumplidos.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 750)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 380, 760, 1900)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$85.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 6 -->
-      <div class="card" data-nombre="Bleu de Chanel">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bleu de Chanel" class="producto-img">
-        <h3>Bleu de Chanel</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Aromática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Bleu de Chanel', 'Sofisticación pura. Un aroma aromático amaderado que mezcla la frescura picante del limón y la menta con incienso.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 200, 400, 1000)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 500, 1000, 2500)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$110.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 7 -->
-      <div class="card" data-nombre="Sauvage Dior">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Sauvage Dior" class="producto-img">
-        <h3>Sauvage Dior</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Cítrica</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Sauvage Dior', 'Radicalmente fresco, crudo y noble. Notas de bergamota de Calabria jugosa y pimienta picante.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 180, 360, 900)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 450, 900, 2250)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$100.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 8 -->
-      <div class="card" data-nombre="1 Million Lucky">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="1 Million Lucky" class="producto-img">
-        <h3>1 Million Lucky</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Ambarina</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('1 Million Lucky', 'Una explosión adictiva de ciruela verde, notas ozónicas y avellana combinadas con maderas ambarinas.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 95, 190, 475)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 170, 340, 850)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 420, 840, 2100)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$95.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 9 -->
-      <div class="card" data-nombre="Le Male Le Parfum">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Le Male Le Parfum" class="producto-img">
-        <h3>Le Male Le Parfum</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Oriental</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Le Male Le Parfum', 'Elegancia magnética con una salida especiada de cardamomo, corazón de lavanda e iris, y un fondo de vainilla.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 100, 200, 500)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 180, 360, 900)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 450, 900, 2250)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$100.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
-      <!-- 10 -->
-      <div class="card" data-nombre="The Most Wanted">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="The Most Wanted" class="producto-img">
-        <h3>The Most Wanted</h3>
-        <div class="info-badge-container">
-          <span class="badge-familia">Especiada</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('The Most Wanted', 'Intensa y seductora con acorde de jengibre picante, madera ambarina y un toque dulce de vainilla.')">i</button>
-        </div>
-        <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 105, 210, 525)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 190, 380, 950)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 480, 960, 2400)">30ml</button>
-        </div>
-        <div class="precio-dinamico">$105.00</div>
-        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
-      </div>
-
       <!-- 11 -->
-      <div class="card" data-nombre="Bad Boy Cobalt">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Bad Boy Cobalt" class="producto-img">
-        <h3>Bad Boy Cobalt</h3>
+      <div class="card" data-nombre="Fakhar Rose Lattafa">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Fakhar Rose" class="producto-img">
+        <h3>Fakhar Rose</h3>
+        <span class="genero-tag">Mujer</span>
         <div class="info-badge-container">
-          <span class="badge-familia">Aromática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Bad Boy Cobalt', 'Una fragancia energizante y audaz con notas minerales, lavanda fresca y un toque sutil de ciruela.')">i</button>
+          <span class="badge-familia">Floral</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Fakhar rose - lattafa', 'Elegante fragancia floral con matices empolvados y frescos que desprenden lujo y feminidad pura.')">i</button>
         </div>
         <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 90, 180, 450)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 160, 320, 800)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 300)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 600)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 300, 600, 1500)">30ml</button>
         </div>
-        <div class="precio-dinamico">$90.00</div>
+        <div class="precio-dinamico">$70.00</div>
         <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
       </div>
 
       <!-- 12 -->
-      <div class="card" data-nombre="Y Le Parfum">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Y Le Parfum" class="producto-img">
-        <h3>Y Le Parfum</h3>
+      <div class="card" data-nombre="Perry Ellis Love Perry Ellis">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Perry Ellis Love" class="producto-img">
+        <h3>Perry Ellis Love</h3>
+        <span class="genero-tag">Mujer</span>
         <div class="info-badge-container">
-          <span class="badge-familia">Fougère</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Y Le Parfum', 'Intensa y oscura. Mezcla poderosa de lavanda francesa, geranio y un fondo profundo de cedro e incienso.')">i</button>
+          <span class="badge-familia">Floral Chipre</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('Perry ellis love - perry ellis', 'Floral romántico con notas luminosas, un corazón vibrante y un fondo suave almizclado.')">i</button>
         </div>
         <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 110, 220, 550)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 200, 400, 1000)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 500, 1000, 2500)">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 300)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 600)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 300, 600, 1500)">30ml</button>
         </div>
-        <div class="precio-dinamico">$110.00</div>
+        <div class="precio-dinamico">$70.00</div>
         <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
       </div>
 
       <!-- 13 -->
-      <div class="card" data-nombre="Hawas Rasasi">
-        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="Hawas Rasasi" class="producto-img">
-        <h3>Hawas Rasasi</h3>
+      <div class="card" data-nombre="CK One Shock For Her Calvin Klein">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="CK One Shock For Her" class="producto-img">
+        <h3>CK One Shock For Her</h3>
+        <span class="genero-tag">Mujer</span>
         <div class="info-badge-container">
-          <span class="badge-familia">Acuática</span>
-          <button class="btn-info-perfume" onclick="mostrarInfo('Hawas Rasasi', 'Frescura acuática frutal con notas de manzana, bergamota y canela, respaldada por ámbar gris. Alto rendimiento.')">i</button>
+          <span class="badge-familia">Oriental Especiada</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('ck one shock for her - Calvin Klein', 'Atrevida y magnética. Mezcla flores orientales con acordes dulces, especiados y avainillados.')">i</button>
         </div>
         <div class="medidas-container">
-          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 170, 425)">5ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 750)">10ml</button>
-          <button class="medida-btn" onclick="seleccionarMedida(this, 380, 760, 1900)">30ml</button>
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 70, 120, 300)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 120, 240, 600)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 300, 600, 1500)">30ml</button>
+        </div>
+        <div class="precio-dinamico">$70.00</div>
+        <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
+      </div>
+
+      <!-- 14 -->
+      <div class="card" data-nombre="9pm Afnan">
+        <img src="https://i.postimg.cc/P5g7t3mc/Perryellislove.png" alt="9pm Afnan" class="producto-img">
+        <h3>9pm Afnan</h3>
+        <span class="genero-tag">Hombre</span>
+        <div class="info-badge-container">
+          <span class="badge-familia">Oriental Vainilla</span>
+          <button class="btn-info-perfume" onclick="mostrarInfo('9pm - Afnan', 'Una bestia nocturna de proyección brutal. Notas dulces, avainilladas y ámbar que enamoran en fiestas y salidas.')">i</button>
+        </div>
+        <div class="medidas-container">
+          <button class="medida-btn active" onclick="seleccionarMedida(this, 85, 150, 400)">5ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 150, 300, 800)">10ml</button>
+          <button class="medida-btn" onclick="seleccionarMedida(this, 400, 800, 2000)">30ml</button>
         </div>
         <div class="precio-dinamico">$85.00</div>
         <button class="btn-agregar" onclick="agregarAlCarrito(event)">Agregar</button>
@@ -1104,7 +1144,7 @@
       sessionStorage.setItem('tiendaAbierta', 'true');
     }
 
-    function seleccionarMedida(btn, precio5ml, precio10ml, precio30ml) {
+    function seleccionarMedida(btn, p5, p10, p30) {
       const card = btn.closest('.card');
       const botones = card.querySelectorAll('.medida-btn');
       
@@ -1112,9 +1152,9 @@
       btn.classList.add('active');
 
       const precioDiv = card.querySelector('.precio-dinamico');
-      let precioFinal = precio5ml;
-      if (btn.innerText.includes('10ml')) precioFinal = precio10ml;
-      if (btn.innerText.includes('30ml')) precioFinal = precio30ml;
+      let precioFinal = p5;
+      if (btn.innerText.includes('10ml')) precioFinal = p10;
+      if (btn.innerText.includes('30ml')) precioFinal = p30;
 
       precioDiv.innerText = `$${precioFinal.toFixed(2)}`;
     }
@@ -1235,7 +1275,6 @@
         return;
       }
 
-      // Calcular subtotal para validar si se activa el efectivo ($250 o más)
       let subtotal = carrito.reduce((acc, item) => acc + item.precio, 0);
       const btnEfectivo = document.getElementById('btn-pago-efectivo');
       const avisoEfectivo = document.getElementById('aviso-efectivo-bloqueado');
@@ -1305,7 +1344,7 @@
       let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
       mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
       mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
-      mensaje += `subtotal: $${subtotal.toFixed(2)}\n`;
+      mensaje += `Subtotal: $${subtotal.toFixed(2)}\n`;
       mensaje += `🚚 *Envío:* $150.00\n`;
       mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
       mensaje += `👤 *CLIENTE:* ${nombre} ${apellido}\n`;
