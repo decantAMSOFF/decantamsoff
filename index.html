@@ -214,9 +214,29 @@
       100% { filter: drop-shadow(0 0 5px #00f3ff); }
     }
 
+    /* Franja de Anuncio de Envicios */
+    .banner-anuncio {
+      background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(188, 19, 254, 0.15), rgba(0, 243, 255, 0.1));
+      border-top: 1px solid rgba(0, 243, 255, 0.3);
+      border-bottom: 1px solid rgba(188, 19, 254, 0.3);
+      padding: 10px 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+    }
+
+    .banner-anuncio p {
+      color: #00f3ff;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+      margin: 0;
+    }
+
     .hero {
       text-align: center;
-      padding: 30px 15px;
+      padding: 20px 15px;
       background: rgba(10, 5, 20, 0.4);
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
@@ -734,8 +754,13 @@
     </div>
   </header>
 
+  <!-- BANNER DE ANUNCIO DE ENVÍOS -->
+  <div class="banner-anuncio">
+    <p>⚡ ENVÍOS A TODO MÉXICO POR $150 ⚡</p>
+  </div>
+
   <div class="hero">
-    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
+    <h2>MAS QUE UN PERFUME ES TU PRESENCIA</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
@@ -1064,7 +1089,7 @@
         </div>
         <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 12px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
         <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20quiero%20acordar%20la%20entrega%20de%20mi%20pedido%20en%20efectivo." target="_blank" class="btn-whatsapp">📲 Enviar mensaje a WhatsApp</a>
-        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar al carrito</button>
       </div>
 
       <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA -->
