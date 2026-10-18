@@ -1133,7 +1133,7 @@
       <button class="btn-enviar-reseña" onclick="agregarReseña()">Publicar Referencia</button>
     </div>
 
-    <!-- Muro de Reseñas -->
+    <!-- Muro de Reseñas (Vacío por defecto) -->
     <div class="grid-reseñas" id="grid-reseñas">
       <!-- Se cargan dinámicamente -->
     </div>
@@ -1278,17 +1278,10 @@
         actualizarCarritoUI();
       }
 
-      // Cargar reseñas guardadas
+      // Cargar reseñas guardadas (Inicia vacío)
       const reseñasGuardadas = localStorage.getItem('decantAMS_reseñas');
       if (reseñasGuardadas) {
         reseñas = JSON.parse(reseñasGuardadas);
-        renderizarReseñas();
-      } else {
-        // Reseñas de ejemplo iniciales
-        reseñas = [
-          { nombre: "Carlos M.", mensaje: "¡Excelente servicio y originales al 100%! El de 9pm proyecta durísimo.", foto: "https://i.postimg.cc/7ZpVLYfm/9pm.png" },
-          { nombre: "Anónimo", mensaje: "Llegó super rápido y bien protegido. Recomendadísimo.", foto: "https://i.postimg.cc/8CJ0y0rw/Perri-ellis-love.png" }
-        ];
         renderizarReseñas();
       }
     });
@@ -1355,6 +1348,10 @@
 
     function renderizarReseñas() {
       const grid = document.getElementById('grid-reseñas');
+      if (reseñas.length === 0) {
+        grid.innerHTML = '<p style="text-align:center; color:#888; font-size:0.8rem; grid-column: 1/-1;">Aún no hay referencias publicadas. ¡Sé el primero en dejar la tuya!</p>';
+        return;
+      }
       let html = "";
       reseñas.forEach(r => {
         html += `
