@@ -22,7 +22,6 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Exponer funciones necesarias a nivel global para los botones del HTML
     window.db = db;
     window.collection = collection;
     window.addDoc = addDoc;
@@ -30,7 +29,6 @@
     window.query = query;
     window.orderBy = orderBy;
 
-    // Cargar referencias al iniciar la página
     window.addEventListener('DOMContentLoaded', () => {
       cargarReseñasFirebase();
     });
@@ -576,6 +574,67 @@
       color: #ccc;
       font-size: 0.8rem;
       line-height: 1.3;
+    }
+
+    /* Sección de Redes Sociales (SÍGUENOS) */
+    .seccion-siguenos {
+      text-align: center;
+      margin: 40px auto 50px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(13, 13, 22, 0.8);
+      border: 2px solid #00f3ff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+
+    .redes-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-red {
+      background: #151520;
+      border: 2px solid #00f3ff;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+    }
+
+    .btn-red:hover {
+      background: #00f3ff;
+      color: #050508;
+      box-shadow: 0 0 20px #00f3ff;
+      transform: translateY(-3px);
+    }
+
+    .btn-red.tiktok:hover {
+      background: #ff0050;
+      border-color: #ff0050;
+      box-shadow: 0 0 20px #ff0050;
+    }
+
+    .btn-red.instagram:hover {
+      background: #bc13fe;
+      border-color: #bc13fe;
+      box-shadow: 0 0 20px #bc13fe;
+    }
+
+    .btn-red.facebook:hover {
+      background: #1877f2;
+      border-color: #1877f2;
+      box-shadow: 0 0 20px #1877f2;
     }
 
     /* Modal / Mini Ventana General */
@@ -1169,6 +1228,23 @@
     <!-- Muro de Reseñas Global -->
     <div class="grid-reseñas" id="grid-reseñas">
       <p style="text-align:center; color:#888; font-size:0.8rem; grid-column: 1/-1;">Cargando referencias de la nube...</p>
+    </div>
+  </section>
+
+  <!-- SECCIÓN SÍGUENOS EN REDES SOCIALES -->
+  <section class="seccion-siguenos">
+    <h2 class="section-title">SÍGUENOS 🌐</h2>
+    <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 10px;">¡Entérate de novedades y dinámicas exclusivas!</p>
+    <div class="redes-grid">
+      <a href="https://www.tiktok.com/@decantamsoff?_r=1&_t=ZS-9Aehs5z5XAE" target="_blank" class="btn-red tiktok">
+        🎵 TikTok
+      </a>
+      <a href="https://www.instagram.com/adrianssito_mtz?psln=MTRkdzl6MzJ2NDJ4dQ==" target="_blank" class="btn-red instagram">
+        📸 Instagram
+      </a>
+      <a href="https://www.facebook.com/share/1FLj822Asi/" target="_blank" class="btn-red facebook">
+        📘 Facebook
+      </a>
     </div>
   </section>
 
