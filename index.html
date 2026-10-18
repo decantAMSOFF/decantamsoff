@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -592,6 +593,56 @@
       box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
     }
 
+    /* Sección de Preguntas Frecuentes (FAQ) */
+    .seccion-faq {
+      background: rgba(13, 13, 22, 0.9);
+      border: 2px solid #00f3ff;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    }
+
+    .faq-item {
+      background: #151520;
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .faq-pregunta {
+      padding: 12px 15px;
+      color: #00f3ff;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-pregunta:hover {
+      background: rgba(0, 243, 255, 0.05);
+    }
+
+    .faq-respuesta {
+      padding: 0 15px 12px 15px;
+      color: #ccc;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: none;
+    }
+
+    .faq-item.activo .faq-respuesta {
+      display: block;
+      padding-top: 10px;
+    }
+
     /* Sección de Reseñas / Referencias */
     .seccion-reseñas {
       background: rgba(13, 13, 22, 0.9);
@@ -1104,7 +1155,7 @@
   </div>
 
   <div class="hero">
-    <h2>NO ES PERFUME ES PRESENCIA</h2>
+    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
@@ -1379,6 +1430,38 @@
     </div>
   </section>
 
+  <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+  <section class="seccion-faq">
+    <h2 class="section-title">PREGUNTAS FRECUENTES ❓</h2>
+    
+    <div class="faq-item">
+      <div class="faq-pregunta" onclick="toggleFaq(this)">
+        ¿Cuánto dura la fijación de un decant? <span>▼</span>
+      </div>
+      <div class="faq-respuesta">
+        Por lo regular los perfumes mostrados aquí tienen una duración de 8 horas en piel y ropa un poco más, también depende de tu PH.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-pregunta" onclick="toggleFaq(this)">
+        ¿Cómo se realizan entregas locales en efectivo? <span>▼</span>
+      </div>
+      <div class="faq-respuesta">
+        Las entregas locales las hacemos en varios puntos cerca de mi pueblito. Si es envío foráneo ya se envía por paquetería (se pide 30% del total de pedido para garantizar la entrega).
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-pregunta" onclick="toggleFaq(this)">
+        ¿Son originales los decants? <span>▼</span>
+      </div>
+      <div class="faq-respuesta">
+        Claro que sí, compramos los perfumes sellados y se rellenan de ahí mismo.
+      </div>
+    </div>
+  </section>
+
   <!-- SECCIÓN DE RESEÑAS / REFERENCIAS CON FIREBASE -->
   <section class="seccion-reseñas">
     <h2 class="section-title">Referencias de Clientes ⚡</h2>
@@ -1488,7 +1571,7 @@
         <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 6. FORMULARIO DE DATOS DINÁMICO (COMPLETO O SIMPLIFICADO) -->
+      <!-- 6. FORMULARIO DE DATOS DINÁMICO -->
       <div id="seccion-formulario" style="display: none;">
         <h3 id="titulo-form-datos">DATOS DE ENVÍO</h3>
         
@@ -1541,6 +1624,14 @@
       const intro = document.getElementById('pantalla-intro');
       intro.classList.add('ocultar-intro');
       sessionStorage.setItem('tiendaAbierta', 'true');
+    }
+
+    // Función para desplegar las Preguntas Frecuentes (FAQ)
+    function toggleFaq(elemento) {
+      const item = elemento.parentElement;
+      item.classList.toggle('activo');
+      const flecha = elemento.querySelector('span');
+      flecha.innerText = item.classList.contains('activo') ? '▲' : '▼';
     }
 
     function copiarAlPortapapeles(texto) {
