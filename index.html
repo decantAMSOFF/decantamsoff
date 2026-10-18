@@ -1122,7 +1122,7 @@
       <h3>¡PEDIDO GENERADO! 🚀</h3>
       <p style="color: #ccc; font-size: 0.85rem;">Tu orden ha sido registrada exitosamente en el sistema.</p>
       <div class="folio-badge" id="texto-folio">Folio: #1001</div>
-      <p style="color: #bbb; font-size: 0.78rem; margin-bottom: 15px;" id="texto-exito-wpp">Se abrirá WhatsApp para que envíes tus datos y tu comprobante de pago.</p>
+      <p style="color: #bbb; font-size: 0.78rem; margin-bottom: 15px;" id="texto-exito-wpp">Se abrirá WhatsApp para enviar tu orden.</p>
       <button class="btn-modal-accion" onclick="cerrarModalExito()">Continuar a WhatsApp</button>
     </div>
   </div>
@@ -1150,7 +1150,7 @@
 
   <!-- BANNER DE ANUNCIO DE ENVÍOS -->
   <div class="banner-anuncio">
-    <p>⚡ ENVÍOS A TODO MÉXICO POR $150 ⚡</p>
+    <p>⚡ ENTREGAS LOCALES Y ENVÍOS A TODO MÉXICO ⚡</p>
   </div>
 
   <div class="hero">
@@ -1520,20 +1520,31 @@
         <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
       </div>
 
-      <!-- 2. SELECCIÓN DE MÉTODOS DE PAGO -->
+      <!-- 2. SELECCIÓN DE TIPO DE ENTREGA -->
+      <div id="seccion-tipo-entrega" style="display: none;">
+        <h3>TIPO DE ENTREGA</h3>
+        <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 12px;">¿Cómo deseas recibir tu pedido?</p>
+        <div class="pago-opciones">
+          <button class="btn-pago" onclick="seleccionarTipoEntrega('Personal')">🤝 Entrega Personal (Local - Sin envío)</button>
+          <button class="btn-pago" onclick="seleccionarTipoEntrega('Foraneo')">📦 Envío Foráneo (+ $150 paquetería)</button>
+        </div>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
+      </div>
+
+      <!-- 3. SELECCIÓN DE MÉTODOS DE PAGO -->
       <div id="seccion-metodos-pago" style="display: none;">
         <h3>REALIZA TU PAGO VÍA</h3>
         <p style="font-size: 0.8rem; color: #00f3ff; margin-bottom: 12px;">Selecciona tu método de pago:</p>
         <div class="pago-opciones">
-          <button class="btn-pago" onclick="seleccionarMetodoEnvio('Transferencia')">⚡ Transferencia (+ $150 envío)</button>
-          <button class="btn-pago" onclick="seleccionarMetodoEnvio('Depósito OXXO')">🏦 Depósito (OXXO) (+ $150 envío)</button>
-          <button class="btn-pago" id="btn-pago-efectivo" onclick="seleccionarMetodoEnvio('Efectivo')">💵 Efectivo (Sin envío)</button>
+          <button class="btn-pago" onclick="seleccionarMetodoPago('Transferencia')">⚡ Transferencia</button>
+          <button class="btn-pago" onclick="seleccionarMetodoPago('Depósito OXXO')">🏦 Depósito (OXXO)</button>
+          <button class="btn-pago" id="btn-pago-efectivo" onclick="seleccionarMetodoPago('Efectivo')">💵 Efectivo</button>
         </div>
         <p id="aviso-efectivo-bloqueado" style="font-size: 0.72rem; color: #ff0055; margin-top: 8px; display: none;">* El pago en efectivo solo está disponible para pedidos de $250 o más.</p>
-        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarTipoEntrega()">Regresar</button>
       </div>
 
-      <!-- 3. DATOS DE TRANSFERENCIA -->
+      <!-- 4. DATOS DE TRANSFERENCIA -->
       <div id="seccion-transferencia" style="display: none;">
         <h3>ᥫ𝐓 𝐑 𝐀 𝐍 𝐒 𝐅 𝐄 𝐑 𝐄 𝐍 𝐂 𝐈 𝐀 𝐒ᥫ</h3>
         <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 8px;">Toca cualquier dato para copiarlo:</p>
@@ -1542,11 +1553,11 @@
           <p>👤 <span>Nombre Titular:</span><br>╰┈➤ ADRIAN</p>
           <p>🏧 <span>CLABE INTERBANCARIA (Toca para copiar):</span><br><span id="texto-clabe" style="font-size: 0.95rem; letter-spacing: 1px;">638180010066831760</span></p>
         </div>
-        <button class="btn-modal-accion" onclick="mostrarFormularioEnvio()">Ya realicé mi pago</button>
+        <button class="btn-modal-accion" onclick="mostrarFormulario()">Ya realicé mi pago</button>
         <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 4. DEPÓSITO OXXO CON QR -->
+      <!-- 5. DEPÓSITO OXXO CON QR -->
       <div id="seccion-oxxo" style="display: none;">
         <h3>DEPÓSITO OXXO</h3>
         <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 5px;">Escanea el código QR o toca la tarjeta para copiar el número:</p>
@@ -1555,31 +1566,31 @@
           <p style="font-size: 0.75rem; color: #aaa; margin-bottom: 2px;">Número para dictar (Toca para copiar):</p>
           <p style="font-size: 0.95rem; font-weight: bold; color: #00f3ff; letter-spacing: 1px;" id="texto-tarjeta">2242 1704 2009 1654</p>
         </div>
-        <button class="btn-modal-accion" onclick="mostrarFormularioEnvio()">Ya realicé mi depósito</button>
+        <button class="btn-modal-accion" onclick="mostrarFormulario()">Ya realicé mi depósito</button>
         <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 5. EFECTIVO / ACORDAR ENTREGA -->
+      <!-- 6. EFECTIVO / ACORDAR ENTREGA -->
       <div id="seccion-efectivo" style="display: none;">
         <h3>PAGO EN EFECTIVO</h3>
         <div class="aviso-importante">
           <strong>⚠️ IMPORTANTE ⚠️</strong>
           PARA GARANTIZAR TU ENTREGA Y QUE SEA UNA COMPRA SEGURA, COMO ES EN EFECTIVO PEDIMOS 30% DE ADELANTO.
         </div>
-        <button class="btn-modal-accion" onclick="mostrarFormularioEnvio()">Continuar con mis datos</button>
+        <button class="btn-modal-accion" onclick="mostrarFormulario()">Continuar con mis datos</button>
         <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 6. FORMULARIO DE DATOS DINÁMICO -->
+      <!-- 7. FORMULARIO DE DATOS DINÁMICO -->
       <div id="seccion-formulario" style="display: none;">
-        <h3 id="titulo-form-datos">DATOS DE ENVÍO</h3>
+        <h3 id="titulo-form-datos">TUS DATOS</h3>
         
         <div class="aviso-importante" id="aviso-dinamico-form">
           <!-- Se llena por JavaScript -->
         </div>
 
         <div class="form-envio" id="contenedor-inputs-formulario">
-          <!-- Se llena dinámicamente según si es Efectivo o Envío -->
+          <!-- Se llena dinámicamente según si es Personal o Foráneo -->
         </div>
 
         <button class="btn-whatsapp" id="btn-enviar-pedido-wpp" onclick="procesarPedidoFirebase()">📤 Enviar Pedido por WhatsApp</button>
@@ -1600,6 +1611,7 @@
 
   <script>
     let carrito = [];
+    let tipoEntregaSeleccionada = '';
     let metodoPagoSeleccionado = '';
     let costoEnvio = 0;
     let urlWhatsAppPendiente = '';
@@ -1625,7 +1637,6 @@
       sessionStorage.setItem('tiendaAbierta', 'true');
     }
 
-    // Función para desplegar las Preguntas Frecuentes (FAQ)
     function toggleFaq(elemento) {
       const item = elemento.parentElement;
       item.classList.toggle('activo');
@@ -1759,30 +1770,55 @@
       }
     }
 
-    function seleccionarMetodoEnvio(metodo) {
+    // Paso 1: Seleccionar Tipo de Entrega
+    function seleccionarTipoEntrega(tipo) {
+      tipoEntregaSeleccionada = tipo;
+      if (tipo === 'Personal') {
+        costoEnvio = 0;
+      } else {
+        costoEnvio = 150;
+      }
+      actualizarCarritoUI();
+      mostrarOpcionesPago();
+    }
+
+    // Paso 2: Seleccionar Método de Pago
+    function seleccionarMetodoPago(metodo) {
       metodoPagoSeleccionado = metodo;
+      if (metodo === 'Transferencia') {
+        mostrarTransferencia();
+      } else if (metodo === 'Depósito OXXO') {
+        mostrarDepositoOxxo();
+      } else if (metodo === 'Efectivo') {
+        mostrarEfectivo();
+      }
+    }
+
+    // Paso 3: Configurar Formulario según si es Personal o Foráneo
+    function mostrarFormulario() {
       const tituloForm = document.getElementById('titulo-form-datos');
       const avisoDinamico = document.getElementById('aviso-dinamico-form');
       const contenedorInputs = document.getElementById('contenedor-inputs-formulario');
       const btnWpp = document.getElementById('btn-enviar-pedido-wpp');
 
-      if (metodo === 'Efectivo') {
-        costoEnvio = 0;
+      if (tipoEntregaSeleccionada === 'Personal') {
         tituloForm.innerText = "TUS DATOS";
-        avisoDinamico.innerHTML = `<strong>🤝 ACORDAR ENTREGA 🤝</strong> Al enviar tu pedido se generará tu número de orden para coordinar la entrega en efectivo.`;
+        avisoDinamico.innerHTML = `<strong>🤝 ENTREGA PERSONAL 🤝</strong> Pedido registrado sin costo de envío. Al enviar se generará tu número de orden.`;
         contenedorInputs.innerHTML = `
           <label>Tu Nombre:</label>
-          <input type="text" id="efectivo-nombre" placeholder="Tu nombre completo">
+          <input type="text" id="pedido-nombre" placeholder="Tu nombre completo">
           
           <label>Notas / Referencias de entrega (Opcional):</label>
-          <textarea id="efectivo-referencias" rows="2" placeholder="Ej. Nos vemos en el centro o cerca de..."></textarea>
+          <textarea id="pedido-referencias" rows="2" placeholder="Ej. Nos vemos en el centro..."></textarea>
         `;
-        btnWpp.innerText = "🤝 Acordar Entrega por WhatsApp";
-        mostrarEfectivo();
+        if (metodoPagoSeleccionado === 'Efectivo') {
+          btnWpp.innerText = "🤝 Acordar Entrega y Pago";
+        } else {
+          btnWpp.innerText = "📤 Enviar Pedido (Pago Previo)";
+        }
       } else {
-        costoEnvio = 150;
-        tituloForm.innerText = "DATOS DE ENVÍO";
-        avisoDinamico.innerHTML = `<strong>⚠️ IMPORTANTE ⚠️</strong> DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO ABAJO DE TUS DATOS. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.`;
+        tituloForm.innerText = "DATOS DE ENVÍO FORÁNEO";
+        avisoDinamico.innerHTML = `<strong>⚠️ IMPORTANTE ⚠️</strong> Se incluye envío por paquetería ($150). Envía tu comprobante o detalles enseguida.`;
         contenedorInputs.innerHTML = `
           <label>Nombre:</label>
           <input type="text" id="envio-nombre" placeholder="Tu nombre">
@@ -1809,25 +1845,26 @@
           <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
         `;
         btnWpp.innerText = "📤 Enviar Pedido por WhatsApp";
-        if (metodo === 'Transferencia') mostrarTransferencia();
-        if (metodo === 'Depósito OXXO') mostrarDepositoOxxo();
       }
+
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-formulario').style.display = 'block';
     }
 
     async function procesarPedidoFirebase() {
       let nombreCliente = "";
       let detalleDireccion = "";
 
-      if (metodoPagoSeleccionado === 'Efectivo') {
-        const nombreEf = document.getElementById('efectivo-nombre').value.trim();
-        const refEf = document.getElementById('efectivo-referencias').value.trim();
+      if (tipoEntregaSeleccionada === 'Personal') {
+        const nombrePers = document.getElementById('pedido-nombre').value.trim();
+        const refPers = document.getElementById('pedido-referencias').value.trim();
 
-        if (!nombreEf) {
+        if (!nombrePers) {
           alert("Por favor ingresa tu nombre.");
           return;
         }
-        nombreCliente = nombreEf;
-        detalleDireccion = `🤝 *Entrega:* Acordar entrega local en el pueblo\nNotas: ${refEf || 'Ninguna'}`;
+        nombreCliente = nombrePers;
+        detalleDireccion = `🤝 *Entrega:* Personal (Local - Sin costo)\nNotas: ${refPers || 'Ninguna'}`;
       } else {
         const nombre = document.getElementById('envio-nombre').value.trim();
         const apellido = document.getElementById('envio-apellido').value.trim();
@@ -1843,7 +1880,7 @@
           return;
         }
         nombreCliente = `${nombre} ${apellido}`;
-        detalleDireccion = `📍 *DIRECCIÓN DE ENVÍO:*\nCalle y Núm: ${calle}\nColonia: ${colonia}\nC.P.: ${cp}\nCiudad: ${ciudad}\nEstado: ${estado}\nReferencias: ${referencias || 'Ninguna'}`;
+        detalleDireccion = `📍 *DIRECCIÓN DE ENVÍO FORÁNEO:*\nCalle y Núm: ${calle}\nColonia: ${colonia}\nC.P.: ${cp}\nCiudad: ${ciudad}\nEstado: ${estado}\nReferencias: ${referencias || 'Ninguna'}`;
       }
 
       let numeroFolio = 1001;
@@ -1872,13 +1909,14 @@
 
       let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
       mensaje += `📦 *NÚMERO DE PEDIDO:* #${numeroFolio}\n`;
+      mensaje += `🤝 *Tipo de Entrega:* ${tipoEntregaSeleccionada === 'Personal' ? 'Entrega Personal (Local)' : 'Envío Foráneo'}\n`;
       mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
       mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
       mensaje += `Subtotal: $${subtotal.toFixed(2)}\n`;
       if (costoEnvio > 0) {
-        mensaje += `🚚 *Envío:* $${costoEnvio.toFixed(2)}\n`;
+        mensaje += `🚚 *Envío Paquetería:* $${costoEnvio.toFixed(2)}\n`;
       } else {
-        mensaje += `🤝 *Entrega:* Local (Sin costo)\n`;
+        mensaje += `🤝 *Envío:* $0.00 (Entrega Personal)\n`;
       }
       mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
       mensaje += `👤 *CLIENTE:* ${nombreCliente}\n`;
@@ -1886,7 +1924,7 @@
       if (metodoPagoSeleccionado === 'Efectivo') {
         mensaje += `🤝 *NOTA:* Acordamos entrega y pago en efectivo.`;
       } else {
-        mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago enseguida.`;
+        mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago / detalles enseguida.`;
       }
 
       const numeroWhatsApp = "527224580020";
@@ -1895,10 +1933,10 @@
       document.getElementById('texto-folio').innerText = `Folio: #${numeroFolio}`;
       
       const textoExitoWpp = document.getElementById('texto-exito-wpp');
-      if (metodoPagoSeleccionado === 'Efectivo') {
-        textoExitoWpp.innerText = "Se abrirá WhatsApp para que envíes tu número de pedido y acuerdes la entrega local.";
+      if (tipoEntregaSeleccionada === 'Personal') {
+        textoExitoWpp.innerText = "Se abrirá WhatsApp para enviar tu número de pedido y coordinar la entrega personal.";
       } else {
-        textoExitoWpp.innerText = "Se abrirá WhatsApp para que envíes tus datos y tu comprobante de pago.";
+        textoExitoWpp.innerText = "Se abrirá WhatsApp para enviar tus datos de envío y tu comprobante.";
       }
 
       document.getElementById('modal-exito-pedido').style.display = 'flex';
@@ -2021,9 +2059,11 @@
         `;
       });
 
+      const totalConEnvio = subtotal + costoEnvio;
+
       listaHTML.innerHTML = html;
       subtotalHTML.innerText = `$${subtotal.toFixed(2)}`;
-      totalHTML.innerText = `$${subtotal.toFixed(2)}`;
+      totalHTML.innerText = `$${totalConEnvio.toFixed(2)}`;
     }
 
     function abrirCarrito() {
@@ -2038,6 +2078,7 @@
 
     function ocultarTodasSeccionesModal() {
       document.getElementById('seccion-resumen-carrito').style.display = 'none';
+      document.getElementById('seccion-tipo-entrega').style.display = 'none';
       document.getElementById('seccion-metodos-pago').style.display = 'none';
       document.getElementById('seccion-transferencia').style.display = 'none';
       document.getElementById('seccion-oxxo').style.display = 'none';
@@ -2055,7 +2096,8 @@
       const btnEfectivo = document.getElementById('btn-pago-efectivo');
       const avisoEfectivo = document.getElementById('aviso-efectivo-bloqueado');
 
-      if (subtotal >= 250) {
+      // Si es entrega personal, liberamos efectivo sin restricción de $250 si quieres, o mantenemos regla general
+      if (tipoEntregaSeleccionada === 'Personal' || subtotal >= 250) {
         btnEfectivo.disabled = false;
         avisoEfectivo.style.display = 'none';
       } else {
@@ -2066,6 +2108,24 @@
       ocultarTodasSeccionesModal();
       document.getElementById('seccion-metodos-pago').style.display = 'block';
     }
+
+    function mostrarTipoEntrega() {
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-tipo-entrega').style.display = 'block';
+    }
+
+    function mostrarOpcionesPagoDesdeCarrito() {
+      if (carrito.length === 0) {
+        alert("¡Tu carrito está vacío!");
+        return;
+      }
+      ocultarTodasSeccionesModal();
+      document.getElementById('seccion-tipo-entrega').style.display = 'block';
+      document.getElementById('modal-carrito').style.display = 'flex';
+    }
+
+    // Modificamos el botón de finalizar pedido para que abra primero la selección de tipo de entrega
+    window.mostrarOpcionesPago = mostrarOpcionesPagoDesdeCarrito;
 
     function regresarAlCarrito() {
       ocultarTodasSeccionesModal();
@@ -2085,11 +2145,6 @@
     function mostrarEfectivo() {
       ocultarTodasSeccionesModal();
       document.getElementById('seccion-efectivo').style.display = 'block';
-    }
-
-    function mostrarFormularioEnvio() {
-      ocultarTodasSeccionesModal();
-      document.getElementById('seccion-formulario').style.display = 'block';
     }
 
     function mostrarInfo(nombre, descripcion) {
