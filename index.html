@@ -1104,7 +1104,7 @@
   </div>
 
   <div class="hero">
-    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
+    <h2>NO ES PERFUME ES PRESENCIA</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
@@ -1488,39 +1488,16 @@
         <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA DINÁMICA -->
+      <!-- 6. FORMULARIO DE DATOS DINÁMICO (COMPLETO O SIMPLIFICADO) -->
       <div id="seccion-formulario" style="display: none;">
-        <h3>DATOS DE ENVÍO</h3>
+        <h3 id="titulo-form-datos">DATOS DE ENVÍO</h3>
         
-        <!-- AVISO DINÁMICO SEGÚN EL MÉTODO DE PAGO -->
         <div class="aviso-importante" id="aviso-dinamico-form">
           <!-- Se llena por JavaScript -->
         </div>
 
-        <div class="form-envio">
-          <label>Nombre:</label>
-          <input type="text" id="envio-nombre" placeholder="Tu nombre">
-          
-          <label>Apellido:</label>
-          <input type="text" id="envio-apellido" placeholder="Tu apellido">
-          
-          <label>Calle y número de casa:</label>
-          <input type="text" id="envio-calle" placeholder="Ej. Av. Juárez #123">
-          
-          <label>Colonia:</label>
-          <input type="text" id="envio-colonia" placeholder="Tu colonia">
-          
-          <label>Código Postal:</label>
-          <input type="text" id="envio-cp" placeholder="50000">
-          
-          <label>Ciudad:</label>
-          <input type="text" id="envio-ciudad" placeholder="Tu ciudad">
-          
-          <label>Estado:</label>
-          <input type="text" id="envio-estado" placeholder="Tu estado">
-          
-          <label>Referencias:</label>
-          <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
+        <div class="form-envio" id="contenedor-inputs-formulario">
+          <!-- Se llena dinámicamente según si es Efectivo o Envío -->
         </div>
 
         <button class="btn-whatsapp" id="btn-enviar-pedido-wpp" onclick="procesarPedidoFirebase()">📤 Enviar Pedido por WhatsApp</button>
@@ -1694,17 +1671,53 @@
 
     function seleccionarMetodoEnvio(metodo) {
       metodoPagoSeleccionado = metodo;
+      const tituloForm = document.getElementById('titulo-form-datos');
       const avisoDinamico = document.getElementById('aviso-dinamico-form');
+      const contenedorInputs = document.getElementById('contenedor-inputs-formulario');
       const btnWpp = document.getElementById('btn-enviar-pedido-wpp');
 
       if (metodo === 'Efectivo') {
         costoEnvio = 0;
+        tituloForm.innerText = "TUS DATOS";
         avisoDinamico.innerHTML = `<strong>🤝 ACORDAR ENTREGA 🤝</strong> Al enviar tu pedido se generará tu número de orden para coordinar la entrega en efectivo.`;
+        contenedorInputs.innerHTML = `
+          <label>Tu Nombre:</label>
+          <input type="text" id="efectivo-nombre" placeholder="Tu nombre completo">
+          
+          <label>Notas / Referencias de entrega (Opcional):</label>
+          <textarea id="efectivo-referencias" rows="2" placeholder="Ej. Nos vemos en el centro o cerca de..."></textarea>
+        `;
         btnWpp.innerText = "🤝 Acordar Entrega por WhatsApp";
         mostrarEfectivo();
       } else {
         costoEnvio = 150;
-        avisoDinamico.innerHTML = `<strong>⚠️ IMPORTANTE ⚠️</strong> DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.`;
+        tituloForm.innerText = "DATOS DE ENVÍO";
+        avisoDinamico.innerHTML = `<strong>⚠️ IMPORTANTE ⚠️</strong> DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO ABAJO DE TUS DATOS. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.`;
+        contenedorInputs.innerHTML = `
+          <label>Nombre:</label>
+          <input type="text" id="envio-nombre" placeholder="Tu nombre">
+          
+          <label>Apellido:</label>
+          <input type="text" id="envio-apellido" placeholder="Tu apellido">
+          
+          <label>Calle y número de casa:</label>
+          <input type="text" id="envio-calle" placeholder="Ej. Av. Juárez #123">
+          
+          <label>Colonia:</label>
+          <input type="text" id="envio-colonia" placeholder="Tu colonia">
+          
+          <label>Código Postal:</label>
+          <input type="text" id="envio-cp" placeholder="50000">
+          
+          <label>Ciudad:</label>
+          <input type="text" id="envio-ciudad" placeholder="Tu ciudad">
+          
+          <label>Estado:</label>
+          <input type="text" id="envio-estado" placeholder="Tu estado">
+          
+          <label>Referencias:</label>
+          <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
+        `;
         btnWpp.innerText = "📤 Enviar Pedido por WhatsApp";
         if (metodo === 'Transferencia') mostrarTransferencia();
         if (metodo === 'Depósito OXXO') mostrarDepositoOxxo();
@@ -1712,18 +1725,35 @@
     }
 
     async function procesarPedidoFirebase() {
-      const nombre = document.getElementById('envio-nombre').value.trim();
-      const apellido = document.getElementById('envio-apellido').value.trim();
-      const calle = document.getElementById('envio-calle').value.trim();
-      const colonia = document.getElementById('envio-colonia').value.trim();
-      const cp = document.getElementById('envio-cp').value.trim();
-      const ciudad = document.getElementById('envio-ciudad').value.trim();
-      const estado = document.getElementById('envio-estado').value.trim();
-      const referencias = document.getElementById('envio-referencias').value.trim();
+      let nombreCliente = "";
+      let detalleDireccion = "";
 
-      if (!nombre || !apellido || !calle || !colonia || !cp || !ciudad || !estado) {
-        alert("Por favor completa los campos obligatorios de tu dirección de envío.");
-        return;
+      if (metodoPagoSeleccionado === 'Efectivo') {
+        const nombreEf = document.getElementById('efectivo-nombre').value.trim();
+        const refEf = document.getElementById('efectivo-referencias').value.trim();
+
+        if (!nombreEf) {
+          alert("Por favor ingresa tu nombre.");
+          return;
+        }
+        nombreCliente = nombreEf;
+        detalleDireccion = `🤝 *Entrega:* Acordar entrega local en el pueblo\nNotas: ${refEf || 'Ninguna'}`;
+      } else {
+        const nombre = document.getElementById('envio-nombre').value.trim();
+        const apellido = document.getElementById('envio-apellido').value.trim();
+        const calle = document.getElementById('envio-calle').value.trim();
+        const colonia = document.getElementById('envio-colonia').value.trim();
+        const cp = document.getElementById('envio-cp').value.trim();
+        const ciudad = document.getElementById('envio-ciudad').value.trim();
+        const estado = document.getElementById('envio-estado').value.trim();
+        const referencias = document.getElementById('envio-referencias').value.trim();
+
+        if (!nombre || !apellido || !calle || !colonia || !cp || !ciudad || !estado) {
+          alert("Por favor completa los campos obligatorios de tu dirección de envío.");
+          return;
+        }
+        nombreCliente = `${nombre} ${apellido}`;
+        detalleDireccion = `📍 *DIRECCIÓN DE ENVÍO:*\nCalle y Núm: ${calle}\nColonia: ${colonia}\nC.P.: ${cp}\nCiudad: ${ciudad}\nEstado: ${estado}\nReferencias: ${referencias || 'Ninguna'}`;
       }
 
       let numeroFolio = 1001;
@@ -1758,17 +1788,11 @@
       if (costoEnvio > 0) {
         mensaje += `🚚 *Envío:* $${costoEnvio.toFixed(2)}\n`;
       } else {
-        mensaje += `🤝 *Entrega:* Acordar entrega local (Efectivo)\n`;
+        mensaje += `🤝 *Entrega:* Local (Sin costo)\n`;
       }
       mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
-      mensaje += `👤 *CLIENTE:* ${nombre} ${apellido}\n`;
-      mensaje += `📍 *DIRECCIÓN / DATOS:*\n`;
-      mensaje += `Calle y Núm: ${calle}\n`;
-      mensaje += `Colonia: ${colonia}\n`;
-      mensaje += `C.P.: ${cp}\n`;
-      mensaje += `Ciudad: ${ciudad}\n`;
-      mensaje += `Estado: ${estado}\n`;
-      mensaje += `Referencias: ${referencias || 'Ninguna'}\n\n`;
+      mensaje += `👤 *CLIENTE:* ${nombreCliente}\n`;
+      mensaje += `${detalleDireccion}\n\n`;
       if (metodoPagoSeleccionado === 'Efectivo') {
         mensaje += `🤝 *NOTA:* Acordamos entrega y pago en efectivo.`;
       } else {
