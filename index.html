@@ -214,7 +214,7 @@
       100% { filter: drop-shadow(0 0 5px #00f3ff); }
     }
 
-    /* Franja de Anuncio de Envicios */
+    /* Banner de Anuncio de Envicios */
     .banner-anuncio {
       background: linear-gradient(90deg, rgba(0, 243, 255, 0.1), rgba(188, 19, 254, 0.15), rgba(0, 243, 255, 0.1));
       border-top: 1px solid rgba(0, 243, 255, 0.3);
@@ -449,6 +449,102 @@
       box-shadow: 0 0 15px #00f3ff;
     }
 
+    /* Sección de Reseñas / Referencias */
+    .seccion-reseñas {
+      background: rgba(13, 13, 22, 0.9);
+      border: 2px solid #bc13fe;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
+    }
+
+    .form-reseña {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .form-reseña input, .form-reseña textarea {
+      background: #151520;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .form-reseña input:focus, .form-reseña textarea:focus {
+      border-color: #00f3ff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+
+    .btn-enviar-reseña {
+      background: linear-gradient(135deg, #00f3ff, #bc13fe);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+      transition: 0.3s;
+    }
+
+    .btn-enviar-reseña:hover {
+      box-shadow: 0 0 20px #00f3ff;
+    }
+
+    .grid-reseñas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .card-reseña {
+      background: #12121c;
+      border: 1px solid rgba(0, 243, 255, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .card-reseña img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid #bc13fe;
+    }
+
+    .card-reseña h4 {
+      color: #00f3ff;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .card-reseña p {
+      color: #ccc;
+      font-size: 0.8rem;
+      line-height: 1.3;
+    }
+
     /* Modal / Mini Ventana General */
     .modal-overlay {
       position: fixed;
@@ -647,7 +743,6 @@
       box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
     }
 
-    /* Formulario de Envío y Advertencia */
     .form-envio {
       display: flex;
       flex-direction: column;
@@ -670,12 +765,6 @@
       border-radius: 8px;
       font-size: 0.8rem;
       width: 100%;
-    }
-
-    .form-envio input:focus, .form-envio textarea:focus {
-      border-color: #00f3ff;
-      outline: none;
-      box-shadow: 0 0 5px rgba(0, 243, 255, 0.4);
     }
 
     .aviso-importante {
@@ -760,13 +849,13 @@
   </div>
 
   <div class="hero">
-    <h2>NO ES PERFUME ES PRESENCIA</h2>
+    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
   <!-- SECCIÓN DE CATÁLOGO (14 CARTAS) -->
   <section id="catalogo">
-    <h2 class="section-title">Perfumes / Decants</h2>
+    <h2 class="section-title">Perfumes / Decants (14)</h2>
     <div class="productos-grid">
       
       <!-- 1 -->
@@ -1024,6 +1113,32 @@
     </div>
   </section>
 
+  <!-- SECCIÓN DE RESEÑAS / REFERENCIAS -->
+  <section class="seccion-reseñas">
+    <h2 class="section-title">Referencias de Clientes ⚡</h2>
+    <div class="form-reseña">
+      <p style="font-size: 0.8rem; color: #00f3ff;">¡Comparte tu foto o comprobante de entrega y deja tu opinión!</p>
+      <input type="text" id="input-nombre" placeholder="Tu nombre (opcional)">
+      <div class="checkbox-container">
+        <input type="checkbox" id="check-anonimo" onchange="toggleAnonimo()">
+        <label for="check-anonimo">Publicar como Anónimo</label>
+      </div>
+      <textarea id="input-mensaje" rows="3" placeholder="Escribe tu reseña o comentario sobre tu pedido..."></textarea>
+      
+      <div style="text-align: left;">
+        <label style="font-size: 0.75rem; color: #bc13fe; font-weight: bold; display: block; margin-bottom: 4px;">Sube tu foto o captura:</label>
+        <input type="file" id="input-foto" accept="image/*" style="font-size: 0.8rem; color: #ccc;">
+      </div>
+
+      <button class="btn-enviar-reseña" onclick="agregarReseña()">Publicar Referencia</button>
+    </div>
+
+    <!-- Muro de Reseñas -->
+    <div class="grid-reseñas" id="grid-reseñas">
+      <!-- Se cargan dinámicamente -->
+    </div>
+  </section>
+
   <!-- MODAL / MINI VENTANA DE CARRITO Y PAGOS -->
   <div id="modal-carrito" class="modal-overlay">
     <div class="modal-contenido">
@@ -1147,6 +1262,7 @@
   <script>
     let carrito = [];
     let metodoPagoSeleccionado = '';
+    let reseñas = [];
 
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
@@ -1161,12 +1277,95 @@
         carrito = JSON.parse(carritoGuardado);
         actualizarCarritoUI();
       }
+
+      // Cargar reseñas guardadas
+      const reseñasGuardadas = localStorage.getItem('decantAMS_reseñas');
+      if (reseñasGuardadas) {
+        reseñas = JSON.parse(reseñasGuardadas);
+        renderizarReseñas();
+      } else {
+        // Reseñas de ejemplo iniciales
+        reseñas = [
+          { nombre: "Carlos M.", mensaje: "¡Excelente servicio y originales al 100%! El de 9pm proyecta durísimo.", foto: "https://i.postimg.cc/7ZpVLYfm/9pm.png" },
+          { nombre: "Anónimo", mensaje: "Llegó super rápido y bien protegido. Recomendadísimo.", foto: "https://i.postimg.cc/8CJ0y0rw/Perri-ellis-love.png" }
+        ];
+        renderizarReseñas();
+      }
     });
 
     function entrarTienda() {
       const intro = document.getElementById('pantalla-intro');
       intro.classList.add('ocultar-intro');
       sessionStorage.setItem('tiendaAbierta', 'true');
+    }
+
+    function toggleAnonimo() {
+      const check = document.getElementById('check-anonimo');
+      const inputNombre = document.getElementById('input-nombre');
+      if (check.checked) {
+        inputNombre.value = "Anónimo";
+        inputNombre.disabled = true;
+      } else {
+        inputNombre.value = "";
+        inputNombre.disabled = false;
+      }
+    }
+
+    function agregarReseña() {
+      const nombreInput = document.getElementById('input-nombre').value.trim();
+      const checkAnonimo = document.getElementById('check-anonimo').checked;
+      const mensaje = document.getElementById('input-mensaje').value.trim();
+      const inputFoto = document.getElementById('input-foto');
+
+      let nombreFinal = checkAnonimo ? "Anónimo" : (nombreInput || "Cliente decantAMS");
+
+      if (!mensaje) {
+        alert("Por favor escribe un mensaje o reseña.");
+        return;
+      }
+
+      if (inputFoto.files && inputFoto.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          reseñas.unshift({ nombre: nombreFinal, mensaje: mensaje, foto: e.target.result });
+          guardarYRenderizarReseñas();
+          limpiarFormReseña();
+        };
+        reader.readAsDataURL(inputFoto.files[0]);
+      } else {
+        // Imagen por defecto si no sube foto
+        reseñas.unshift({ nombre: nombreFinal, mensaje: mensaje, foto: "https://i.postimg.cc/P5g7t3mc/Perryellislove.png" });
+        guardarYRenderizarReseñas();
+        limpiarFormReseña();
+      }
+    }
+
+    function limpiarFormReseña() {
+      document.getElementById('input-nombre').value = "";
+      document.getElementById('input-mensaje').value = "";
+      document.getElementById('input-foto').value = "";
+      document.getElementById('check-anonimo').checked = false;
+      document.getElementById('input-nombre').disabled = false;
+    }
+
+    function guardarYRenderizarReseñas() {
+      localStorage.setItem('decantAMS_reseñas', JSON.stringify(reseñas));
+      renderizarReseñas();
+    }
+
+    function renderizarReseñas() {
+      const grid = document.getElementById('grid-reseñas');
+      let html = "";
+      reseñas.forEach(r => {
+        html += `
+          <div class="card-reseña">
+            <img src="${r.foto}" alt="Referencia de Cliente">
+            <h4>${r.nombre}</h4>
+            <p>${r.mensaje}</p>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
     }
 
     function seleccionarMedida(btn, p5, p10, p30) {
