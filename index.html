@@ -480,25 +480,30 @@
       box-shadow: 0 0 15px #00f3ff;
     }
 
-    /* Botón Flotante de WhatsApp */
+    /* Botón Flotante de WhatsApp con Logo Oficial */
     .whatsapp-flotante {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background: #25d366;
-      color: #fff;
       width: 55px;
       height: 55px;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.8rem;
       box-shadow: 0 0 15px rgba(37, 211, 102, 0.7);
       z-index: 9998;
       text-decoration: none;
       transition: 0.3s ease;
       animation: pulsoWpp 2s infinite;
+      padding: 10px;
+    }
+
+    .whatsapp-flotante img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .whatsapp-flotante:hover {
@@ -625,7 +630,7 @@
       line-height: 1.3;
     }
 
-    /* Sección de Redes Sociales (Logos Oficiales) */
+    /* Sección de Redes Sociales (Logos Oficiales Nuevos) */
     .seccion-siguenos {
       text-align: center;
       margin: 40px auto 50px auto;
@@ -942,9 +947,9 @@
     </div>
   </div>
 
-  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <!-- BOTÓN FLOTANTE DE WHATSAPP CON LOGO OFICIAL -->
   <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20vengo%20de%20su%20tienda%20online%20y%20tengo%20una%20duda." target="_blank" class="whatsapp-flotante" title="Contáctanos por WhatsApp">
-    💬
+    <img src="https://i.postimg.cc/9MVNzcJ1/Whats-App-icon.png" alt="WhatsApp">
   </a>
 
   <!-- NOTIFICACIÓN COPIADO -->
@@ -1267,19 +1272,19 @@
     </div>
   </section>
 
-  <!-- SECCIÓN SÍGUENOS EN REDES SOCIALES (LOGOS OFICIALES) -->
+  <!-- SECCIÓN SÍGUENOS EN REDES SOCIALES (CON TUS NUEVOS LOGOS) -->
   <section class="seccion-siguenos">
     <h2 class="section-title">SÍGUENOS 🌐</h2>
     <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 12px;">¡Entérate de novedades y dinámicas exclusivas!</p>
     <div class="redes-grid">
       <a href="https://www.tiktok.com/@decantamsoff?_r=1&_t=ZS-9Aehs5z5XAE" target="_blank" title="TikTok">
-        <img src="https://i.postimg.cc/851zL040/92060.png" alt="TikTok" class="logo-red">
+        <img src="https://i.postimg.cc/282mDKjK/tt.png" alt="TikTok" class="logo-red">
       </a>
       <a href="https://www.instagram.com/adrianssito_mtz?psln=MTRkdzl6MzJ2NDJ4dQ==" target="_blank" title="Instagram">
-        <img src="https://i.postimg.cc/w16z9y7v/92062.png" alt="Instagram" class="logo-red">
+        <img src="https://i.postimg.cc/TPbZp7GK/Instagram-icon.png" alt="Instagram" class="logo-red">
       </a>
       <a href="https://www.facebook.com/share/1FLj822Asi/" target="_blank" title="Facebook">
-        <img src="https://i.postimg.cc/s21V3Z5p/92061.png" alt="Facebook" class="logo-red">
+        <img src="https://i.postimg.cc/L597QmPY/Facebook-f-logo-(2019)-svg.png" alt="Facebook" class="logo-red">
       </a>
     </div>
   </section>
@@ -1314,7 +1319,7 @@
         <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="regresarAlCarrito()">Regresar al carrito</button>
       </div>
 
-      <!-- 3. DATOS DE TRANSFERENCIA (Con Copiado al Portapapeles) -->
+      <!-- 3. DATOS DE TRANSFERENCIA -->
       <div id="seccion-transferencia" style="display: none;">
         <h3>ᥫ𝐓 𝐑 𝐀 𝐍 𝐒 𝐅 𝐄 𝐑 𝐄 𝐍 𝐂 𝐈 𝐀 𝐒ᥫ</h3>
         <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 8px;">Toca cualquier dato para copiarlo:</p>
@@ -1327,7 +1332,7 @@
         <button class="btn-modal-cerrar" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 4. DEPÓSITO OXXO CON QR (Con Copiado al Portapapeles) -->
+      <!-- 4. DEPÓSITO OXXO CON QR -->
       <div id="seccion-oxxo" style="display: none;">
         <h3>DEPÓSITO OXXO</h3>
         <p style="font-size: 0.75rem; color: #00f3ff; margin-bottom: 5px;">Escanea el código QR o toca la tarjeta para copiar el número:</p>
@@ -1350,7 +1355,7 @@
         </div>
         <p style="font-size: 0.78rem; color: #aaa; margin-bottom: 12px;">Pásate directo a mi WhatsApp para afinar los detalles de tu entrega personal:</p>
         <a href="https://wa.me/527224580020?text=Hola%20decantAMS,%20quiero%20acordar%20la%20entrega%20de%20mi%20pedido%20en%20efectivo." target="_blank" class="btn-whatsapp">📲 Enviar mensaje a WhatsApp</a>
-        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
+        <button class="btn-modal-cerrar" style="margin-top: 15px;" onclick="mostrarOpcionesPago()">Regresar al carrito</button>
       </div>
 
       <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA -->
@@ -1430,7 +1435,6 @@
       sessionStorage.setItem('tiendaAbierta', 'true');
     }
 
-    // Función para copiar al portapapeles con notificación toast
     function copiarAlPortapapeles(texto) {
       navigator.clipboard.writeText(texto).then(() => {
         const toast = document.getElementById('toast-copiado');
@@ -1455,7 +1459,6 @@
       }
     }
 
-    // Funciones de Firebase Firestore para el Muro Global
     async function agregarReseñaFirebase() {
       const nombreInput = document.getElementById('input-nombre').value.trim();
       const checkAnonimo = document.getElementById('check-anonimo').checked;
