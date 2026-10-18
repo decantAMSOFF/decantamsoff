@@ -1,7 +1,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>decantAMS | Cyber Edition</title>
   
@@ -1908,18 +1907,18 @@
 
       let totalConEnvio = subtotal + costoEnvio;
 
-      // Estructura exacta solicitada con emojis seguros
-      let mensaje = "🔱Nuevo PEDIDO - DecantAMS🔱\n\n" +
-                    "🛡NUMERO DE PEDIDO: #" + numeroFolio + "\n" +
-                    "⚜️Tipo De Entrega: " + (tipoEntregaSeleccionada === 'Personal' ? 'Entrega Personal (Local)' : 'Envío Foráneo') + "\n" +
-                    "💶METODO DE PAGO: " + metodoPagoSeleccionado + "\n\n" +
-                    "💫PRODUCTOS: \n" + detalleProductos + "\n" +
-                    "💰SUBTOTAL: $" + subtotal.toFixed(2) + "\n" +
-                    "⚜️ENVIO: $" + costoEnvio.toFixed(2) + "\n" +
-                    "🔱TOTAL A PAGAR: $" + totalConEnvio.toFixed(2) + "\n\n" +
-                    "👤CLIENTE: " + nombreCliente + "\n" +
-                    "💠ENTREGA: " + detalleClienteEntrega + "\n\n" +
-                    "📃NOTA: " + (metodoPagoSeleccionado === 'Efectivo' ? 'Acordamos entrega y pago en efectivo.' : 'Envío mi comprobante de pago / detalles enseguida.');
+      // Estructura exacta con emojis universales seguros
+      let mensaje = "⚡ Nuevo PEDIDO - DecantAMS ⚡\n\n" +
+                    "📦 NUMERO DE PEDIDO: #" + numeroFolio + "\n" +
+                    "🚚 Tipo De Entrega: " + (tipoEntregaSeleccionada === 'Personal' ? 'Entrega Personal (Local)' : 'Envío Foráneo') + "\n" +
+                    "💳 METODO DE PAGO: " + metodoPagoSeleccionado + "\n\n" +
+                    "🛍️ PRODUCTOS: \n" + detalleProductos + "\n" +
+                    "💵 SUBTOTAL: $" + subtotal.toFixed(2) + "\n" +
+                    "📦 ENVIO: $" + costoEnvio.toFixed(2) + "\n" +
+                    "💰 TOTAL A PAGAR: $" + totalConEnvio.toFixed(2) + "\n\n" +
+                    "👤 CLIENTE: " + nombreCliente + "\n" +
+                    "📍 ENTREGA: " + detalleClienteEntrega + "\n\n" +
+                    "📃 NOTA: " + (metodoPagoSeleccionado === 'Efectivo' ? 'Acordamos entrega y pago en efectivo.' : 'Envío mi comprobante de pago / detalles enseguida.');
 
       const numeroWhatsApp = "527224580020";
       urlWhatsAppPendiente = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
