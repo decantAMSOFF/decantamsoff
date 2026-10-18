@@ -4,6 +4,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>decantAMS | Cyber Edition</title>
   
+  <!-- Librería de Confeti vía CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <!-- Firebase SDKs vía CDN -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -538,7 +541,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Modal Pro de Confirmación de Pedido */
+    /* Modal Pro de Confirmación de Pedido con Confeti */
     #modal-exito-pedido {
       position: fixed;
       top: 0;
@@ -1069,7 +1072,7 @@
       <h3>¡PEDIDO GENERADO! 🚀</h3>
       <p style="color: #ccc; font-size: 0.85rem;">Tu orden ha sido registrada exitosamente en el sistema.</p>
       <div class="folio-badge" id="texto-folio">Folio: #1001</div>
-      <p style="color: #bbb; font-size: 0.78rem; margin-bottom: 15px;">Se abrirá WhatsApp para que envíes tus datos y tu comprobante de pago.</p>
+      <p style="color: #bbb; font-size: 0.78rem; margin-bottom: 15px;" id="texto-exito-wpp">Se abrirá WhatsApp para que envíes tus datos y tu comprobante de pago.</p>
       <button class="btn-modal-accion" onclick="cerrarModalExito()">Continuar a WhatsApp</button>
     </div>
   </div>
@@ -1485,13 +1488,13 @@
         <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar a métodos</button>
       </div>
 
-      <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA -->
+      <!-- 6. FORMULARIO DE DATOS DE ENVÍO Y ADVERTENCIA DINÁMICA -->
       <div id="seccion-formulario" style="display: none;">
         <h3>DATOS DE ENVÍO</h3>
         
-        <div class="aviso-importante">
-          <strong>⚠️ IMPORTANTE ⚠️</strong>
-          DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO ABAJO DE TUS DATOS. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.
+        <!-- AVISO DINÁMICO SEGÚN EL MÉTODO DE PAGO -->
+        <div class="aviso-importante" id="aviso-dinamico-form">
+          <!-- Se llena por JavaScript -->
         </div>
 
         <div class="form-envio">
@@ -1520,7 +1523,7 @@
           <textarea id="envio-referencias" rows="2" placeholder="Color de casa, entre calles..."></textarea>
         </div>
 
-        <button class="btn-whatsapp" onclick="procesarPedidoFirebase()">📤 Enviar Pedido por WhatsApp</button>
+        <button class="btn-whatsapp" id="btn-enviar-pedido-wpp" onclick="procesarPedidoFirebase()">📤 Enviar Pedido por WhatsApp</button>
         <button class="btn-modal-cerrar" style="margin-top: 10px;" onclick="mostrarOpcionesPago()">Regresar</button>
       </div>
 
@@ -1665,7 +1668,6 @@
       document.getElementById('input-nombre').disabled = false;
     }
 
-    // Registrar participación en dinámicas/sorteos en Firebase
     async function registrarSorteoFirebase() {
       const folio = document.getElementById('input-folio-sorteo').value.trim();
       const nombre = document.getElementById('input-nombre-sorteo').value.trim();
@@ -1692,15 +1694,20 @@
 
     function seleccionarMetodoEnvio(metodo) {
       metodoPagoSeleccionado = metodo;
+      const avisoDinamico = document.getElementById('aviso-dinamico-form');
+      const btnWpp = document.getElementById('btn-enviar-pedido-wpp');
+
       if (metodo === 'Efectivo') {
         costoEnvio = 0;
+        avisoDinamico.innerHTML = `<strong>🤝 ACORDAR ENTREGA 🤝</strong> Al enviar tu pedido se generará tu número de orden para coordinar la entrega en efectivo.`;
+        btnWpp.innerText = "🤝 Acordar Entrega por WhatsApp";
         mostrarEfectivo();
-      } else if (metodo === 'Transferencia') {
+      } else {
         costoEnvio = 150;
-        mostrarTransferencia();
-      } else if (metodo === 'Depósito OXXO') {
-        costoEnvio = 150;
-        mostrarDepositoOxxo();
+        avisoDinamico.innerHTML = `<strong>⚠️ IMPORTANTE ⚠️</strong> DESPUÉS DE ENVIAR TU PEDIDO, MANDA TU COMPROBANTE DE INMEDIATO. UNA VEZ CONFIRMADO SE EMPEZARÁ A TRABAJAR EN TU PEDIDO.`;
+        btnWpp.innerText = "📤 Enviar Pedido por WhatsApp";
+        if (metodo === 'Transferencia') mostrarTransferencia();
+        if (metodo === 'Depósito OXXO') mostrarDepositoOxxo();
       }
     }
 
@@ -1748,23 +1755,46 @@
       mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
       mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
       mensaje += `Subtotal: $${subtotal.toFixed(2)}\n`;
-      mensaje += `🚚 *Envío:* $${costoEnvio.toFixed(2)}\n`;
+      if (costoEnvio > 0) {
+        mensaje += `🚚 *Envío:* $${costoEnvio.toFixed(2)}\n`;
+      } else {
+        mensaje += `🤝 *Entrega:* Acordar entrega local (Efectivo)\n`;
+      }
       mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
       mensaje += `👤 *CLIENTE:* ${nombre} ${apellido}\n`;
-      mensaje += `📍 *DIRECCIÓN DE ENVÍO:*\n`;
+      mensaje += `📍 *DIRECCIÓN / DATOS:*\n`;
       mensaje += `Calle y Núm: ${calle}\n`;
       mensaje += `Colonia: ${colonia}\n`;
       mensaje += `C.P.: ${cp}\n`;
       mensaje += `Ciudad: ${ciudad}\n`;
       mensaje += `Estado: ${estado}\n`;
       mensaje += `Referencias: ${referencias || 'Ninguna'}\n\n`;
-      mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago enseguida.`;
+      if (metodoPagoSeleccionado === 'Efectivo') {
+        mensaje += `🤝 *NOTA:* Acordamos entrega y pago en efectivo.`;
+      } else {
+        mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago enseguida.`;
+      }
 
       const numeroWhatsApp = "527224580020";
       urlWhatsAppPendiente = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
       document.getElementById('texto-folio').innerText = `Folio: #${numeroFolio}`;
+      
+      const textoExitoWpp = document.getElementById('texto-exito-wpp');
+      if (metodoPagoSeleccionado === 'Efectivo') {
+        textoExitoWpp.innerText = "Se abrirá WhatsApp para que envíes tu número de pedido y acuerdes la entrega local.";
+      } else {
+        textoExitoWpp.innerText = "Se abrirá WhatsApp para que envíes tus datos y tu comprobante de pago.";
+      }
+
       document.getElementById('modal-exito-pedido').style.display = 'flex';
+
+      // Disparar animación de confeti pro
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     }
 
     function cerrarModalExito() {
