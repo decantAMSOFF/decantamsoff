@@ -1,6 +1,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>decantAMS | Cyber Edition</title>
   
@@ -1154,7 +1155,7 @@
   </div>
 
   <div class="hero">
-    <h2>NO ES PERFUME ES PRESENCIA</h2>
+    <h2>SISTEMA CYBERPUNK ACTIVO</h2>
     <p>⚡ Fragancias exclusivas y decants de alta gama ⚡</p>
   </div>
 
@@ -1901,36 +1902,39 @@
       let detalleProductos = "";
       let subtotal = 0;
       carrito.forEach(item => {
-        detalleProductos += `• ${item.nombre} (${item.medida}) - $${item.precio.toFixed(2)}\n`;
+        detalleProductos = detalleProductos + "• " + item.nombre + " (" + item.medida + ") - $" + item.precio.toFixed(2) + "\n";
         subtotal += item.precio;
       });
 
       let totalConEnvio = subtotal + costoEnvio;
 
-      let mensaje = `⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n`;
-      mensaje += `📦 *NÚMERO DE PEDIDO:* #${numeroFolio}\n`;
-      mensaje += `🤝 *Tipo de Entrega:* ${tipoEntregaSeleccionada === 'Personal' ? 'Entrega Personal (Local)' : 'Envío Foráneo'}\n`;
-      mensaje += `💳 *Método de Pago:* ${metodoPagoSeleccionado}\n\n`;
-      mensaje += `📦 *PRODUCTOS:* \n${detalleProductos}\n`;
-      mensaje += `Subtotal: $${subtotal.toFixed(2)}\n`;
+      let mensaje = "⚡ *NUEVO PEDIDO - decantAMS* ⚡\n\n" +
+                    "📦 *NÚMERO DE PEDIDO:* #" + numeroFolio + "\n" +
+                    "🤝 *Tipo de Entrega:* " + (tipoEntregaSeleccionada === 'Personal' ? 'Entrega Personal (Local)' : 'Envío Foráneo') + "\n" +
+                    "💳 *Método de Pago:* " + metodoPagoSeleccionado + "\n\n" +
+                    "📦 *PRODUCTOS:* \n" + detalleProductos + "\n" +
+                    "Subtotal: $" + subtotal.toFixed(2) + "\n";
+      
       if (costoEnvio > 0) {
-        mensaje += `🚚 *Envío Paquetería:* $${costoEnvio.toFixed(2)}\n`;
+        mensaje = mensaje + "🚚 *Envío Paquetería:* $" + costoEnvio.toFixed(2) + "\n";
       } else {
-        mensaje += `🤝 *Envío:* $0.00 (Entrega Personal)\n`;
+        mensaje = mensaje + "🤝 *Envío:* $0.00 (Entrega Personal)\n";
       }
-      mensaje += `💰 *TOTAL A PAGAR:* $${totalConEnvio.toFixed(2)}\n\n`;
-      mensaje += `👤 *CLIENTE:* ${nombreCliente}\n`;
-      mensaje += `${detalleDireccion}\n\n`;
+
+      mensaje = mensaje + "💰 *TOTAL A PAGAR:* $" + totalConEnvio.toFixed(2) + "\n\n" +
+                          "👤 *CLIENTE:* " + nombreCliente + "\n" +
+                          detalleDireccion + "\n\n";
+
       if (metodoPagoSeleccionado === 'Efectivo') {
-        mensaje += `🤝 *NOTA:* Acordamos entrega y pago en efectivo.`;
+        mensaje = mensaje + "🤝 *NOTA:* Acordamos entrega y pago en efectivo.";
       } else {
-        mensaje += `⚠️ *NOTA:* Envío mi comprobante de pago / detalles enseguida.`;
+        mensaje = mensaje + "⚠️ *NOTA:* Envío mi comprobante de pago / detalles enseguida.";
       }
 
       const numeroWhatsApp = "527224580020";
-      urlWhatsAppPendiente = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+      urlWhatsAppPendiente = "https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(mensaje);
 
-      document.getElementById('texto-folio').innerText = `Folio: #${numeroFolio}`;
+      document.getElementById('texto-folio').innerText = "Folio: #" + numeroFolio;
       
       const textoExitoWpp = document.getElementById('texto-exito-wpp');
       if (tipoEntregaSeleccionada === 'Personal') {
@@ -1971,7 +1975,7 @@
       if (btn.innerText.includes('10ml')) precioFinal = p10;
       if (btn.innerText.includes('30ml')) precioFinal = p30;
 
-      precioDiv.innerText = `$${precioFinal.toFixed(2)}`;
+      precioDiv.innerText = "$" + precioFinal.toFixed(2);
     }
 
     function agregarAlCarrito(event) {
@@ -1998,15 +2002,15 @@
       flyImage.className = 'fly-img';
 
       const rectImg = imgProducto.getBoundingClientRect();
-      flyImage.style.top = `${rectImg.top}px`;
-      flyImage.style.left = `${rectImg.left}px`;
+      flyImage.style.top = rectImg.top + "px";
+      flyImage.style.left = rectImg.left + "px";
       document.body.appendChild(flyImage);
 
       const rectCarrito = carritoBtn.getBoundingClientRect();
 
       setTimeout(() => {
-        flyImage.style.top = `${rectCarrito.top}px`;
-        flyImage.style.left = `${rectCarrito.left}px`;
+        flyImage.style.top = rectCarrito.top + "px";
+        flyImage.style.left = rectCarrito.left + "px";
         flyImage.style.width = '15px';
         flyImage.style.height = '15px';
         flyImage.style.opacity = '0.3';
@@ -2047,12 +2051,12 @@
 
       carrito.forEach((item, index) => {
         subtotal += item.precio;
-        html += `
+        html = html + `
           <div class="item-carrito">
-            <div>${item.nombre} <span>(${item.medida})</span></div>
+            <div>` + item.nombre + ` <span>(` + item.medida + `)</span></div>
             <div>
-              $${item.precio.toFixed(2)} 
-              <button class="btn-eliminar-item" onclick="eliminarDelCarrito(${index})">✖</button>
+              $` + item.precio.toFixed(2) + ` 
+              <button class="btn-eliminar-item" onclick="eliminarDelCarrito(` + index + `)">✖</button>
             </div>
           </div>
         `;
@@ -2061,8 +2065,8 @@
       const totalConEnvio = subtotal + costoEnvio;
 
       listaHTML.innerHTML = html;
-      subtotalHTML.innerText = `$${subtotal.toFixed(2)}`;
-      totalHTML.innerText = `$${totalConEnvio.toFixed(2)}`;
+      subtotalHTML.innerText = "$" + subtotal.toFixed(2);
+      totalHTML.innerText = "$" + totalConEnvio.toFixed(2);
     }
 
     function abrirCarrito() {
