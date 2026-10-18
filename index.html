@@ -3,6 +3,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>decantAMS | Cyber Edition</title>
+  
+  <!-- Firebase SDKs vía CDN -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAvwLqzdN_brOTbfY_XkK44pwlYDmJqU_o",
+      authDomain: "decantams.firebaseapp.com",
+      projectId: "decantams",
+      storageBucket: "decantams.firebasestorage.app",
+      messagingSenderId: "338646837628",
+      appId: "1:338646837628:web:21d6443e86e1347b391cf9",
+      measurementId: "G-63N7LH97JL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Exponer funciones necesarias a nivel global para los botones del HTML
+    window.db = db;
+    window.collection = collection;
+    window.addDoc = addDoc;
+    window.getDocs = getDocs;
+    window.query = query;
+    window.orderBy = orderBy;
+
+    // Cargar referencias al iniciar la página
+    window.addEventListener('DOMContentLoaded', () => {
+      cargarReseñasFirebase();
+    });
+  </script>
+
   <style>
     /* Estilos Base - Fondo Galaxia Local & Cyberpunk */
     * {
@@ -1113,7 +1146,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN DE RESEÑAS / REFERENCIAS -->
+  <!-- SECCIÓN DE RESEÑAS / REFERENCIAS CON FIREBASE -->
   <section class="seccion-reseñas">
     <h2 class="section-title">Referencias de Clientes ⚡</h2>
     <div class="form-reseña">
@@ -1130,12 +1163,12 @@
         <input type="file" id="input-foto" accept="image/*" style="font-size: 0.8rem; color: #ccc;">
       </div>
 
-      <button class="btn-enviar-reseña" onclick="agregarReseña()">Publicar Referencia</button>
+      <button class="btn-enviar-reseña" onclick="agregarReseñaFirebase()">Publicar Referencia</button>
     </div>
 
-    <!-- Muro de Reseñas (Vacío por defecto) -->
+    <!-- Muro de Reseñas Global -->
     <div class="grid-reseñas" id="grid-reseñas">
-      <!-- Se cargan dinámicamente -->
+      <p style="text-align:center; color:#888; font-size:0.8rem; grid-column: 1/-1;">Cargando referencias de la nube...</p>
     </div>
   </section>
 
@@ -1262,7 +1295,6 @@
   <script>
     let carrito = [];
     let metodoPagoSeleccionado = '';
-    let reseñas = [];
 
     window.addEventListener('DOMContentLoaded', () => {
       if (sessionStorage.getItem('tiendaAbierta') === 'true') {
@@ -1276,13 +1308,6 @@
       if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
         actualizarCarritoUI();
-      }
-
-      // Cargar reseñas guardadas (Inicia vacío)
-      const reseñasGuardadas = localStorage.getItem('decantAMS_reseñas');
-      if (reseñasGuardadas) {
-        reseñas = JSON.parse(reseñasGuardadas);
-        renderizarReseñas();
       }
     });
 
@@ -1304,7 +1329,8 @@
       }
     }
 
-    function agregarReseña() {
+    // Funciones de Firebase Firestore para el Muro Global
+    async function agregarReseñaFirebase() {
       const nombreInput = document.getElementById('input-nombre').value.trim();
       const checkAnonimo = document.getElementById('check-anonimo').checked;
       const mensaje = document.getElementById('input-mensaje').value.trim();
@@ -1317,19 +1343,60 @@
         return;
       }
 
+      const guardarEnFirestore = async (fotoUrl) => {
+        try {
+          await window.addDoc(window.collection(window.db, "reseñas"), {
+            nombre: nombreFinal,
+            mensaje: mensaje,
+            foto: fotoUrl,
+            fecha: Date.now()
+          });
+          limpiarFormReseña();
+          cargarReseñasFirebase();
+          alert("¡Referencia publicada con éxito en la nube!");
+        } catch (e) {
+          console.error("Error al guardar reseña: ", e);
+          alert("Hubo un error al publicar. Inténtalo de nuevo.");
+        }
+      };
+
       if (inputFoto.files && inputFoto.files[0]) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          reseñas.unshift({ nombre: nombreFinal, mensaje: mensaje, foto: e.target.result });
-          guardarYRenderizarReseñas();
-          limpiarFormReseña();
+          guardarEnFirestore(e.target.result);
         };
         reader.readAsDataURL(inputFoto.files[0]);
       } else {
-        // Imagen por defecto si no sube foto
-        reseñas.unshift({ nombre: nombreFinal, mensaje: mensaje, foto: "https://i.postimg.cc/P5g7t3mc/Perryellislove.png" });
-        guardarYRenderizarReseñas();
-        limpiarFormReseña();
+        guardarEnFirestore("https://i.postimg.cc/P5g7t3mc/Perryellislove.png");
+      }
+    }
+
+    async function cargarReseñasFirebase() {
+      const grid = document.getElementById('grid-reseñas');
+      try {
+        const q = window.query(window.collection(window.db, "reseñas"), window.orderBy("fecha", "desc"));
+        const querySnapshot = await window.getDocs(q);
+        
+        if (querySnapshot.empty) {
+          grid.innerHTML = '<p style="text-align:center; color:#888; font-size:0.8rem; grid-column: 1/-1;">Aún no hay referencias publicadas. ¡Sé el primero en dejar la tuya!</p>';
+          return;
+        }
+
+        let html = "";
+        querySnapshot.forEach((doc) => {
+          const r = doc.data();
+          html += `
+            <div class="card-reseña">
+              <img src="${r.foto}" alt="Referencia de Cliente">
+              <h4>${r.nombre}</h4>
+              <p>${r.mensaje}</p>
+            </div>
+          `;
+        });
+        grid.innerHTML = html;
+      } catch (e) {
+        console.error("Error cargando reseñas: ", e);
+        grid.innerHTML = '<p style="text-align:center; color:#ff0055; font-size:0.8rem; grid-column: 1/-1;">Error al cargar las referencias de la nube.</p>';
       }
     }
 
@@ -1339,30 +1406,6 @@
       document.getElementById('input-foto').value = "";
       document.getElementById('check-anonimo').checked = false;
       document.getElementById('input-nombre').disabled = false;
-    }
-
-    function guardarYRenderizarReseñas() {
-      localStorage.setItem('decantAMS_reseñas', JSON.stringify(reseñas));
-      renderizarReseñas();
-    }
-
-    function renderizarReseñas() {
-      const grid = document.getElementById('grid-reseñas');
-      if (reseñas.length === 0) {
-        grid.innerHTML = '<p style="text-align:center; color:#888; font-size:0.8rem; grid-column: 1/-1;">Aún no hay referencias publicadas. ¡Sé el primero en dejar la tuya!</p>';
-        return;
-      }
-      let html = "";
-      reseñas.forEach(r => {
-        html += `
-          <div class="card-reseña">
-            <img src="${r.foto}" alt="Referencia de Cliente">
-            <h4>${r.nombre}</h4>
-            <p>${r.mensaje}</p>
-          </div>
-        `;
-      });
-      grid.innerHTML = html;
     }
 
     function seleccionarMedida(btn, p5, p10, p30) {
