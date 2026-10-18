@@ -1516,7 +1516,7 @@
           Subtotal: <span id="modal-subtotal">$0.00</span><br>
           Total a Pagar: <span id="modal-total-precio">$0.00</span>
         </div>
-        <button class="btn-modal-accion" onclick="mostrarOpcionesPago()">Finalizar pedido</button>
+        <button class="btn-modal-accion" onclick="mostrarTipoEntrega()">Finalizar pedido</button>
         <button class="btn-modal-cerrar" onclick="cerrarModal('modal-carrito')">Seguir comprando</button>
       </div>
 
@@ -1941,7 +1941,6 @@
 
       document.getElementById('modal-exito-pedido').style.display = 'flex';
 
-      // Disparar animación de confeti pro
       confetti({
         particleCount: 120,
         spread: 70,
@@ -2096,7 +2095,6 @@
       const btnEfectivo = document.getElementById('btn-pago-efectivo');
       const avisoEfectivo = document.getElementById('aviso-efectivo-bloqueado');
 
-      // Si es entrega personal, liberamos efectivo sin restricción de $250 si quieres, o mantenemos regla general
       if (tipoEntregaSeleccionada === 'Personal' || subtotal >= 250) {
         btnEfectivo.disabled = false;
         avisoEfectivo.style.display = 'none';
@@ -2110,11 +2108,6 @@
     }
 
     function mostrarTipoEntrega() {
-      ocultarTodasSeccionesModal();
-      document.getElementById('seccion-tipo-entrega').style.display = 'block';
-    }
-
-    function mostrarOpcionesPagoDesdeCarrito() {
       if (carrito.length === 0) {
         alert("¡Tu carrito está vacío!");
         return;
@@ -2123,9 +2116,6 @@
       document.getElementById('seccion-tipo-entrega').style.display = 'block';
       document.getElementById('modal-carrito').style.display = 'flex';
     }
-
-    // Modificamos el botón de finalizar pedido para que abra primero la selección de tipo de entrega
-    window.mostrarOpcionesPago = mostrarOpcionesPagoDesdeCarrito;
 
     function regresarAlCarrito() {
       ocultarTodasSeccionesModal();
